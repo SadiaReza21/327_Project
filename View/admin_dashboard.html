@@ -13,6 +13,42 @@
 <div>
     <h1>Admin Dashboard</h1>
     <a href="/add_product"><button>Add Product</button></a>
+    <h2>Your Products</h2>
+    {% for product in products %}
+        <div class="product-card"style = "border: 1px solid #ddd">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image" 
+        style="width: 250px; height: 250px;  object-fit: cover;">
+        
+        <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>   
+            
+            <p class="product-category">{{ categories.get(product.category_id) }}</p>
+
+            <p class="product-price">{{ product.price }} Taka</p>
+            
+            <p class="product-stock">
+                {% if product.stock > 0 %}
+                    <span class="in-stock">In Stock ({{ product.stock }})</span>
+                {% else %}
+                    <span class="out-of-stock">Out of Stock</span>
+                {% endif %}
+            </p>
+            
+            {% if product.is_available %}
+                <span class="badge available">Available</span>
+            {% else %}
+                <span class="badge unavailable">Unavailable</span>
+            {% endif %}
+            <form method="post" action="/edit_product">
+                <input type="text" value="{{product.product_id}}" hidden>
+                <button type="submit">Edit Information</button>
+            </form>
+            <form method="post" action="/delete_product">
+                <input type="text" value="{{product.product_id}}" hidden>
+                <button type="submit">Delete Product</button>
+            </form>
+        </div>
+    {% endfor %}
 </div>
 </body>
 </html>

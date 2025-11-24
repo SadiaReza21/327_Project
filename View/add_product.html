@@ -38,8 +38,8 @@
         <div class="form-group">
             <label for="p_category">Category:</label>
             <select id="p_category" name="p_category" required>
-                {% for category in categories %}
-                <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+                {% for cat_id, cat_name in categories.items() %}
+                    <option value="{{ cat_id }}">{{ cat_name }}</option>
                 {% endfor %}
             </select>
         </div>

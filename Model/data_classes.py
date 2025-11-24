@@ -19,7 +19,7 @@ class Category:
         self.category_name = name
 
     @staticmethod
-    def get_list() -> List["Category"]:
+    def get_category_dict() -> dict[int, str]:
         conn = None
         cursor = None
         try:
@@ -29,27 +29,22 @@ class Category:
             cursor.execute(sql)
             rows = cursor.fetchall()
             
-            result = []
-            for row in rows:
-                #Creating category objects for each row fetched for database
-                new_category = Category(row["category_id"], row["category_name"]) 
-                result.append(new_category)
-            return result
+            return {row["category_id"]: row["category_name"] for row in rows}
             
         except Error as e:
             print(f"Category get_list error: {e}")
-            return []
+            return {}
         finally:
             if cursor:
                 cursor.close()
             if conn and conn.is_connected():
-                conn.close()
+                conn.close()   
 
 class Product:
 
     def __init__(
             self, product_id: int , category_id: int , name: str , description: str, price: float, stock: int, 
-            image: str, date_today: date, is_available: bool):
+            image: str, date_added: date, is_available: bool):
         self.product_id: int = product_id
         self.category_id: int = category_id
         self.name: str = name
@@ -57,8 +52,8 @@ class Product:
         self.price: float = price
         self.stock: int = stock
         self.image_url: str = image
-        self.date_added: date = date.today()
-        self.is_available: bool = True
+        self.date_added: date = date_added
+        self.is_available: bool = is_available
 
     @staticmethod
     def create_product(product: "Product") -> bool:
@@ -97,24 +92,29 @@ class Product:
             if conn and conn.is_connected():
                 conn.close()
     
-    # @staticmethod
-    # def get_list() -> List[Dict[str, Any]]:
-    #     """SQL: Get all products"""
-    #     conn = None
-    #     try:
-    #         conn = mysql.connector.connect(**DB_CONFIG)
-    #         cursor = conn.cursor(dictionary=True)
-    #         cursor.execute("""
-    #             SELECT p.*, c.name as category_name 
-    #             FROM products p 
-    #             LEFT JOIN categories c ON p.category_id = c.id 
-    #             ORDER BY p.name
-    #         """)
-    #         return cursor.fetchall()
-    #     except Error as e:
-    #         print(f"Product get_list error: {e}")
-    #         return []
-    #     finally:
-    #         if conn and conn.is_connected():
-    #             cursor.close()
-    #             conn.close()
+    @staticmethod
+    def get_product_list() -> List["Product"]:
+        conn = None
+        cursor = None
+        try:
+            conn = mysql.connector.connect(**DB_CONFIG)
+            cursor = conn.cursor(dictionary=True)
+            sql = "SELECT * FROM product"
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            
+            result = []
+            for row in rows:
+                #Creating product objects for each row fetched for database
+                new_product = Product(row["product_id"], row["category_id"], row["name"], row["description"], row["price"], row["stock"], row["image_url"], row["date_added"], row["is_available"]) 
+                result.append(new_product)
+            return result
+            
+        except Error as e:
+            print(f"Product get_list error: {e}")
+            return []
+        finally:
+            if cursor:
+                cursor.close()
+            if conn and conn.is_connected():
+                conn.close()

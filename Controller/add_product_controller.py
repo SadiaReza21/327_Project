@@ -1,4 +1,3 @@
-# add_product_controller.py
 from fastapi import FastAPI, Form, Request, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -9,20 +8,16 @@ import os
 from fastapi import APIRouter
 from Model.data_classes import Category, Product
 
-
-# Serve CSS/images from /static folder (we'll fix links later)
-# app.mount("/static", StaticFiles(directory="."), name="static")
-
 templates = Jinja2Templates(directory=".")
 router = APIRouter()
 
 @router.get("/add_product")
 def add_product(request: Request):
     # Getting the available category list from database
-    categories = Category.get_list()   
+    category_list = Category.get_category_dict() 
     return templates.TemplateResponse(
         "View/add_product.html", 
-        {"request": request, "categories": categories}
+        {"request": request, "categories": category_list}
     )
 
 # Receives data from html form
@@ -57,7 +52,7 @@ async def submit_product(
     os.makedirs(folder_path, exist_ok=True)
 
     image_filename = "default.jpg"
-    image_url = "ProductImages/default.jpg"
+    image_url = "ProductImages/default.png"
 
     if product_image and product_image.filename:
         # 1. sanitize filename
@@ -83,7 +78,7 @@ async def submit_product(
                 "View/thanks.html", 
                 {"request": request,
                 "product": new_product}
-        )
+            )    
     else:
         import shutil
         shutil.rmtree(folder_path, ignore_errors=True)

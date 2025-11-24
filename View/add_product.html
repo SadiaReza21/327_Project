@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a property listing website">
+    <meta http-equiv=“X-UA-Compatible” content= “IE=edge” >
+
+    <link rel="stylesheet" href="">
+    <title>Bazar Kori | Add Product</title>
+</head>
+<body>
+<div>
+    <h1>Homepgae</h1>
+    <form method="post" action="/submit_product" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="p_name">Product Name:</label>
+            <input type="text" id="p_name" name="p_name" maxlength="80" placeholder="Name of your product" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="p_description" name="p_description" rows="4" style="resize: none; font-family: sans-serif;" 
+            placeholder="Short description preview of your product"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price per Unit in tk:</label>
+            <input type="text" id="p_price" name="p_price" pattern="[0-9.]+" placeholder="230.50" required>
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock Quantity:</label>
+            <input type="text" id="p_quantity" name="p_quantity" pattern="[0-9]+" placeholder="100" required>
+        </div>
+
+        <h3>Product Category: </h3>
+        <div class="form-group">
+            <label for="p_category">Category:</label>
+            <select id="p_category" name="p_category" required>
+                {% for category in categories %}
+                <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="productImage">Product Images:</label>
+            <input type="file" name="product_image" accept="image/*">
+            <div id="imagePreviewContainer" class="image-preview-container"></div>
+        </div>
+
+        <button type="submit">Add Product</button>
+
+    </form>
+</div>
+</body>
+</html>

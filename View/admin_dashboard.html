@@ -7,12 +7,14 @@
     <meta http-equiv=“X-UA-Compatible” content= “IE=edge” >
 
     <link rel="stylesheet" href="">
-    <title>Bazar Kori | Admin</title>
+    <title>Bazar Kori | Admin Dashboard</title>
 </head>
 <body>
 <div>
     <h1>Admin Dashboard</h1>
-    <a href="/add_product"><button>Add Product</button></a>
+    <a href="/r_add_product/add_product"><button>Add Product</button></a>
+
+    <!-- Current products-->
     <h2>Your Products</h2>
     {% for product in products %}
         <div class="product-card"style = "border: 1px solid #ddd">
@@ -20,10 +22,9 @@
         style="width: 250px; height: 250px;  object-fit: cover;">
         
         <div class="product-info">
-            <h3 class="product-name">{{ product.name }}</h3>   
-            
+            <h3 class="product-name">{{ product.name }}</h3>
+            <h4 class="product-des">{{ product.description }}</h4>            
             <p class="product-category">{{ categories.get(product.category_id) }}</p>
-
             <p class="product-price">{{ product.price }} Taka</p>
             
             <p class="product-stock">
@@ -39,16 +40,55 @@
             {% else %}
                 <span class="badge unavailable">Unavailable</span>
             {% endif %}
-            <form method="post" action="/edit_product">
-                <input type="text" value="{{product.product_id}}" hidden>
+
+            <!-- Button for editing product-->
+            <form method="get" action="/r_edit_product/edit_product">
+                <input type="text" name = "p_id" id ="p_id" value="{{product.product_id}}" hidden>
                 <button type="submit">Edit Information</button>
             </form>
-            <form method="post" action="/delete_product">
-                <input type="text" value="{{product.product_id}}" hidden>
-                <button type="submit">Delete Product</button>
+            <!-- Button for archiving product -->
+            <form method="post" action="/r_archive_product/archive_product" onsubmit="return confirm('Are you sure you want to archive the product? It will not be visible to buyers anymore!');">
+                <input type="text" name = "p_id" id ="p_id" value="{{product.product_id}}" hidden >
+                <button type="submit">Archive Product</button>
             </form>
         </div>
     {% endfor %}
+
+    <!-- Archived Products-->
+    <h2>Your Archived Products</h2>
+    {% for product in archived_products %}
+        <div class="product-card"style = "border: 1px solid #ddd">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image" 
+        style="width: 250px; height: 250px;  object-fit: cover;">
+        
+        <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <h4 class="product-des">{{ product.description }}</h4>            
+            <p class="product-category">{{ categories.get(product.category_id) }}</p>
+            <p class="product-price">{{ product.price }} Taka</p>
+            
+            <p class="product-stock">
+                {% if product.stock > 0 %}
+                    <span class="in-stock">In Stock ({{ product.stock }})</span>
+                {% else %}
+                    <span class="out-of-stock">Out of Stock</span>
+                {% endif %}
+            </p>
+            
+            {% if product.is_available %}
+                <span class="badge available">Available</span>
+            {% else %}
+                <span class="badge unavailable">Unavailable</span>
+            {% endif %}
+
+            <!-- Button for unarchiving product -->
+            <form method="post" action="/r_archive_product/unarchive_product" onsubmit="return confirm('Are you sure you want to unarchive the product? It will be visible to buyers!');">
+                <input type="text" name = "p_id" id ="p_id" value="{{product.product_id}}" hidden >
+                <button type="submit">Unarchive Product</button>
+            </form>
+        </div>
+    {% endfor %}
+
 </div>
 </body>
 </html>

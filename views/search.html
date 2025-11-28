@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Products - Bazar Kori</title>
+    <link rel="stylesheet" href="/static/search.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <h1 class="logo">Bazar Kori</h1>
+            </div>
+            <nav class="navigation">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Categories</a>
+                <a href="#" class="nav-link">My Account</a>
+                <a href="#" class="nav-link basket-link">Basket(2)</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Search Section -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Search Header -->
+            <div class="search-header">
+                <h2 class="page-title">Search Products</h2>
+                <p class="page-subtitle">Find your desired products quickly and easily</p>
+            </div>
+
+            <!-- Search Form -->
+            <div class="search-section">
+                <div class="search-form-container">
+                    <form id="searchForm" class="search-form">
+                        <div class="search-input-group">
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                class="search-input" 
+                                placeholder="Enter product name or category..."
+                                aria-label="Search products"
+                            >
+                            <button type="submit" class="search-button" id="searchButton">
+                                <span class="search-icon">🔍</span>
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Filters Section -->
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <label for="categoryFilter" class="filter-label">Category:</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <!-- Categories will be loaded dynamically -->
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="minPrice" class="filter-label">Price Range:</label>
+                        <div class="price-range-group">
+                            <input 
+                                type="number" 
+                                id="minPrice" 
+                                class="price-input" 
+                                placeholder="Min" 
+                                min="0"
+                            >
+                            <span class="price-separator">-</span>
+                            <input 
+                                type="number" 
+                                id="maxPrice" 
+                                class="price-input" 
+                                placeholder="Max" 
+                                min="0"
+                            >
+                        </div>
+                    </div>
+
+                    <button type="button" id="applyFilters" class="filter-button">
+                        Apply Filters
+                    </button>
+                    <button type="button" id="resetFilters" class="filter-button secondary">
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Results Section -->
+            <div class="results-section">
+                <div id="loadingSpinner" class="loading-spinner hidden">
+                    <div class="spinner"></div>
+                    <p>Searching products...</p>
+                </div>
+
+                <div id="resultsContainer" class="results-container">
+                    <div id="noResultsMessage" class="no-results hidden">
+                        <h3>No products found</h3>
+                        <p>Try adjusting your search terms or filters</p>
+                    </div>
+
+                    <div id="emptySearchMessage" class="empty-search hidden">
+                        <h3>Please enter a search term</h3>
+                        <p>Enter a product name or category to start searching</p>
+                    </div>
+
+                    <div id="errorMessage" class="error-message hidden">
+                        <h3>Unable to load search results</h3>
+                        <p>Please check your connection and try again later</p>
+                    </div>
+
+                    <div id="productsGrid" class="products-grid"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Bazar Kori. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/static/search.js"></script>
+</body>
+</html>

@@ -15,9 +15,10 @@ app.include_router(add_product_router)
 app.include_router(archive_product_router)
 app.include_router(edit_product_router)
 
-templates = Jinja2Templates(directory=".")
+templates = Jinja2Templates(directory="View")
 
 app.mount("/ProductImages", StaticFiles(directory="ProductImages"), name="product_images")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def root(request: Request):
@@ -25,7 +26,7 @@ async def root(request: Request):
     archived_product_list = Product.get_archived_product_list()
     category_list = Category.get_category_dict() 
     return templates.TemplateResponse(
-        "View/admin_dashboard.html", 
+        "admin_dashboard.html", 
         {"request": request, "products": product_list, "archived_products": archived_product_list, "categories": category_list}
     )
 

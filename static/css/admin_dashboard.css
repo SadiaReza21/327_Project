@@ -1,0 +1,176 @@
+/* ===== Global Styling ===== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f4ff, #fefefe);
+    color: #333;
+}
+
+/* ===== Header ===== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 30px;
+    background: #ffffffcc;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #ddd;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.title span {
+    color: #666;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.primary {
+    background: #4a72ff;
+    color: #fff;
+}
+
+.primary:hover {
+    background: #3c60d6;
+}
+
+.danger {
+    background: #ff4a4a;
+    color: #fff;
+}
+
+.danger:hover {
+    background: #d63c3c;
+}
+
+/* ===== Dashboard ===== */
+.dashboard {
+    padding: 30px;
+}
+
+/* ===== Section Block (Glass Effect) ===== */
+.glass {
+    background: #ffffffcc;
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 35px;
+}
+
+/* ===== Product Grid ===== */
+.product-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-top: 10px;
+}
+
+/* ===== Product Card ===== */
+.product-card {
+     width: 240px;      
+    min-height: 260px; 
+    padding-bottom: 50px; 
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    position: relative;
+    transition: 0.25s ease;
+}
+
+.product-card.shadow {
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.09);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+}
+
+.product-card p {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+   
+.product-image {
+    height: 150px;
+    width: 150px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.product-des {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+.product-category {
+    font-size: 12px;
+    color: #999;
+    margin: 0;
+}
+
+.product-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4a72ff;
+    margin-top: 4px;
+}
+
+.in-stock {
+    color: #1e8f3d;
+    font-weight: bold;
+}
+
+.out-of-stock {
+    color: #c62828;
+    font-weight: bold;
+}
+
+
+/* ===== Action Icons ===== */
+.actions {
+    bottom: 12px;
+    display: flex;
+    gap: 14px; 
+    margin-top: 10px;
+}
+
+.actions span {
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.edit:hover {
+    color: #4a72ff;
+}
+
+.delete:hover {
+    color: #ff4a4a;
+}

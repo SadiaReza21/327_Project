@@ -6,60 +6,45 @@
     <meta name="description" content="This is a property listing website">
     <meta http-equiv=“X-UA-Compatible” content= “IE=edge” >
 
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/static/css/add_product.css">
     <title>Bazar Kori | Edit Product Information</title>
 </head>
 <body>
-    <h1>Edit Product</h1>
-    <form method="post" action="/r_edit_product/update_product" enctype="multipart/form-data">
+    <header>
+        <div class="title">Bazar Kori <span>(Admin)</span></div>
+        <button class="logout">Log Out</button>
+    </header>
 
-        <!--Product id-->
-        <input type="text" name="p_id" value="{{product.product_id}}" hidden>
+    <div class="container glass">
+        <h1>Edit Product Information</h1>
+        <p class="subtitle">Change Product Details:</p>
 
-        <img src="/{{ product.image_url }}" alt="{{ product.name }}" class="product-image" 
-        style="width: 250px; height: 250px;  object-fit: cover;">
+        <form class="product-form" method="post" action="/r_edit_product/update_product" enctype="multipart/form-data">
 
-        <div class="form-group">
-            <label for="p_name">Product Name:</label>
-            <input type="text" id="p_name" name="p_name" maxlength="80" placeholder="Name of your product" value="{{product.name}}" required>
-        </div>
+            <!--Product id-->
+            <input type="text" name="p_id" value="{{product.product_id}}" hidden>
+            <!--Existing image url-->
+            <input type="text" name="prev_product_image" value="{{product.image_url}}" hidden>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="p_description" name="p_description" rows="4" style="resize: none; " 
-            placeholder="Short description preview of your product">{{product.description}}</textarea>
-        </div>
+            <img src="/{{ product.image_url }}" alt="{{ product.name }}" class="product-image" 
+                style="width: 250px; height: 250px;  object-fit: cover;">
 
-        <div class="form-group">
-            <label for="price">Price per Unit in tk:</label>
-            <input type="text" id="p_price" name="p_price" pattern="[0-9.]+" placeholder="230.50" value="{{product.price}}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="stock">Stock Quantity:</label>
-            <input type="text" id="p_quantity" name="p_quantity" pattern="[0-9]+" placeholder="100" value="{{product.stock}}" required>
-        </div>
-
-        <h3>Product Category: </h3>
-        <div class="form-group">
-            <label for="p_category">Category:</label>
-            <select id="p_category" name="p_category" required>
+            <input type="text"id="p_name" name="p_name" maxlength="80" placeholder="Product Name" value="{{product.name}}" required>
+            <textarea id="p_description" name="p_description" rows="4" style="resize: none; font-family: sans-serif;" 
+                placeholder="Short description preview of your product">{{product.description}}</textarea>
+            <input type="number" id="p_quantity" name="p_quantity" pattern="[0-9]+" placeholder="Product Quantity" value="{{product.stock}}" required>
+            <input type="number" step="0.01" id="p_price" name="p_price" pattern="[0-9.]+" placeholder="Price Per Unit in Taka" value="{{product.price}}" required>
+            <select id="p_category" name="p_category" class="cat_menu" required>      
                 {% for cat_id, cat_name in categories.items() %}
                     <option value="{{ cat_id }}" {% if cat_id == product.category_id %} selected {% endif %}>{{ cat_name }}</option>
                 {% endfor %}
             </select>
-        </div>
-
-        <!--Existing image url-->
-        <input type="text" name="prev_product_image" value="{{product.image_url}}" hidden>
-
-        <div class="form-group">
+            </select>
             <label for="productImage">Product Images (Select a new image to replace the older one):</label>
-            <input type="file" name="product_image" accept="image/*">
-            <div id="imagePreviewContainer" class="image-preview-container"></div>
-        </div>
-
-        <button type="submit">Save Changes</button>
-    </form>
+                <input type="file" name="product_image" accept="image/*">
+                <div id="imagePreviewContainer" class="image-preview-container"></div>
+            <button type="submit" class="submit-btn">Save Changes</button>
+        </form>
+    </div>
 </body>
 </html>

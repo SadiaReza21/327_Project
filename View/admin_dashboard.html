@@ -6,89 +6,100 @@
     <meta name="description" content="This is a property listing website">
     <meta http-equiv=“X-UA-Compatible” content= “IE=edge” >
 
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/static/css/admin_dashboard.css">
     <title>Bazar Kori | Admin Dashboard</title>
 </head>
 <body>
-<div>
-    <h1>Admin Dashboard</h1>
-    <a href="/r_add_product/add_product"><button>Add Product</button></a>
+    <header>
+    <div class="title">Bazar Kori <span>(Admin)</span></div>
+    <div class="header-buttons">
+        <a href="/r_add_product/add_product"><button class="btn primary">Add Product</button></a>
+        <button class="btn danger">Logout</button>
+    </div>
+</header>
 
-    <!-- Current products-->
-    <h2>Your Products</h2>
-    {% for product in products %}
-        <div class="product-card"style = "border: 1px solid #ddd">
-        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image" 
-        style="width: 250px; height: 250px;  object-fit: cover;">
-        
-        <div class="product-info">
-            <h3 class="product-name">{{ product.name }}</h3>
-            <h4 class="product-des">{{ product.description }}</h4>            
-            <p class="product-category">{{ categories.get(product.category_id) }}</p>
-            <p class="product-price">{{ product.price }} Taka</p>
-            
-            <p class="product-stock">
-                {% if product.stock > 0 %}
-                    <span class="in-stock">In Stock ({{ product.stock }})</span>
-                {% else %}
-                    <span class="out-of-stock">Out of Stock</span>
-                {% endif %}
-            </p>
-            
-            {% if product.is_available %}
-                <span class="badge available">Available</span>
-            {% else %}
-                <span class="badge unavailable">Unavailable</span>
-            {% endif %}
+<section class="dashboard">
+    <h2>Dashboard</h2>
 
-            <!-- Button for editing product-->
-            <form method="get" action="/r_edit_product/edit_product">
-                <input type="text" name = "p_id" id ="p_id" value="{{product.product_id}}" hidden>
-                <button type="submit">Edit Information</button>
-            </form>
-            <!-- Button for archiving product -->
-            <form method="post" action="/r_archive_product/archive_product" onsubmit="return confirm('Are you sure you want to archive the product? It will not be visible to buyers anymore!');">
-                <input type="text" name = "p_id" id ="p_id" value="{{product.product_id}}" hidden >
-                <button type="submit">Archive Product</button>
-            </form>
+    <!-- Added Products Section -->
+    <div class="section-block glass">
+        <h3>Your Products</h3>
+        <div class="product-grid">
+
+            {% for product in products %}
+            <div class="product-card shadow">
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
+
+                <p class="product-name">{{ product.name }}</p>
+                <p class="product-des">{{ product.description }}</p>
+                <p class="product-category">{{ categories.get(product.category_id) }}</p>
+                <p class="product-price">{{ product.price }} Taka</p>
+
+                <p class="product-stock">
+                    {% if product.stock > 0 %}
+                        <span class="in-stock">In Stock ({{ product.stock }})</span>
+                    {% else %}
+                        <span class="out-of-stock">Out of Stock</span>
+                    {% endif %}
+                </p>
+
+                <div class="actions">
+                    <!-- Edit Button -->
+                    <form method="get" action="/r_edit_product/edit_product">
+                        <input type="hidden" name="p_id" value="{{ product.product_id }}">
+                        <button type="submit" class="edit">✎</button>
+                    </form>
+
+                    <!-- Archive Button -->
+                    <form method="post" action="/r_archive_product/archive_product"
+                        onsubmit="return confirm('Archive this product? Buyers will not see it.')">
+                        <input type="hidden" name="p_id" value="{{ product.product_id }}">
+                        <button type="submit" class="archive">🗃️</button>
+                    </form>
+                </div>
+
+            </div>
+            {% endfor %}
+
         </div>
-    {% endfor %}
+    </div>
 
-    <!-- Archived Products-->
-    <h2>Your Archived Products</h2>
-    {% for product in archived_products %}
-        <div class="product-card"style = "border: 1px solid #ddd">
-        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image" 
-        style="width: 250px; height: 250px;  object-fit: cover;">
-        
-        <div class="product-info">
-            <h3 class="product-name">{{ product.name }}</h3>
-            <h4 class="product-des">{{ product.description }}</h4>            
-            <p class="product-category">{{ categories.get(product.category_id) }}</p>
-            <p class="product-price">{{ product.price }} Taka</p>
-            
-            <p class="product-stock">
-                {% if product.stock > 0 %}
-                    <span class="in-stock">In Stock ({{ product.stock }})</span>
-                {% else %}
-                    <span class="out-of-stock">Out of Stock</span>
-                {% endif %}
-            </p>
-            
-            {% if product.is_available %}
-                <span class="badge available">Available</span>
-            {% else %}
-                <span class="badge unavailable">Unavailable</span>
-            {% endif %}
+    <!-- Archived Products Section -->
+    <div class="section-block glass">
+        <h3>Your Archived Products</h3>
+        <div class="product-grid">
 
-            <!-- Button for unarchiving product -->
-            <form method="post" action="/r_archive_product/unarchive_product" onsubmit="return confirm('Are you sure you want to unarchive the product? It will be visible to buyers!');">
-                <input type="text" name = "p_id" id ="p_id" value="{{product.product_id}}" hidden >
-                <button type="submit">Unarchive Product</button>
-            </form>
+            {% for product in archived_products %}
+            <div class="product-card shadow">
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
+
+                <p class="product-name">{{ product.name }}</p>
+                <p class="product-des">{{ product.description }}</p>
+                <p class="product-category">{{ categories.get(product.category_id) }}</p>
+                <p class="product-price">{{ product.price }} Taka</p>
+
+                <p class="product-stock">
+                    {% if product.stock > 0 %}
+                        <span class="in-stock">In Stock ({{ product.stock }})</span>
+                    {% else %}
+                        <span class="out-of-stock">Out of Stock</span>
+                    {% endif %}
+                </p>
+
+                <div class="actions">
+                    <!-- Unarchive Button -->
+                    <form method="post" action="/r_archive_product/unarchive_product"
+                        onsubmit="return confirm('Unarchive this product? It becomes visible to buyers.')">
+                        <input type="hidden" name="p_id" value="{{ product.product_id }}">
+                        <button type="submit" class="archive">⤴</button>
+                    </form>
+                </div>
+
+            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 
-</div>
+</section>
 </body>
 </html>

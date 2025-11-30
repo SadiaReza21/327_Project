@@ -6,53 +6,36 @@
     <meta name="description" content="This is a property listing website">
     <meta http-equiv=“X-UA-Compatible” content= “IE=edge” >
 
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/static/css/add_product.css">
     <title>Bazar Kori | Add Product</title>
 </head>
 <body>
-<div>
-    <h1>Add Product</h1>
-    <form method="post" action="/r_add_product/submit_product" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="p_name">Product Name:</label>
-            <input type="text" id="p_name" name="p_name" maxlength="80" placeholder="Name of your product" required>
-        </div>
+    <header>
+        <div class="title">Bazar Kori <span>(Admin)</span></div>
+        <button class="logout">Log Out</button>
+    </header>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
+    <div class="container glass">
+        <h1>Add a Product</h1>
+        <p class="subtitle">Enter Product Details:</p>
+
+        <form class="product-form" method="post" action="/r_add_product/submit_product" enctype="multipart/form-data">
+
+            <input type="text"id="p_name" name="p_name" maxlength="80" placeholder="Product Name" required>
             <textarea id="p_description" name="p_description" rows="4" style="resize: none; font-family: sans-serif;" 
-            placeholder="Short description preview of your product"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="price">Price per Unit in tk:</label>
-            <input type="text" id="p_price" name="p_price" pattern="[0-9.]+" placeholder="230.50" required>
-        </div>
-
-        <div class="form-group">
-            <label for="stock">Stock Quantity:</label>
-            <input type="text" id="p_quantity" name="p_quantity" pattern="[0-9]+" placeholder="100" required>
-        </div>
-
-        <h3>Product Category: </h3>
-        <div class="form-group">
-            <label for="p_category">Category:</label>
-            <select id="p_category" name="p_category" required>
+                placeholder="Short description preview of your product"></textarea>
+            <input type="number" id="p_quantity" name="p_quantity" pattern="[0-9]+" placeholder="Product Quantity" required>
+            <input type="number" step="0.01" id="p_price" name="p_price" pattern="[0-9.]+" placeholder="Price Per Unit in Taka" required>
+            <select id="p_category" name="p_category" class="cat_menu" required>
                 {% for cat_id, cat_name in categories.items() %}
-                    <option value="{{ cat_id }}">{{ cat_name }}</option>
+                    <option class="cat_menu" value="{{ cat_id }}">{{ cat_name }}</option>
                 {% endfor %}
             </select>
-        </div>
-
-        <div class="form-group">
-            <label for="productImage">Product Images:</label>
-            <input type="file" name="product_image" accept="image/*">
-            <div id="imagePreviewContainer" class="image-preview-container"></div>
-        </div>
-
-        <button type="submit">Add Product</button>
-
-    </form>
-</div>
+            <label for="productImage">Product Image:</label>
+                <input type="file" name="product_image" accept="image/*">
+                <div id="imagePreviewContainer" class="image-preview-container"></div>
+            <button type="submit" class="submit-btn">Add Product</button>
+        </form>
+    </div>
 </body>
 </html>

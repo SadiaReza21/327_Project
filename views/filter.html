@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Products - Bazar Kori</title>
+
+    <!-- CORRECT STATIC PATHS – THIS FIXES EVERYTHING -->
+    <link rel="stylesheet" href="/static/filter.css">
+    <script src="/static/filter.js" defer></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <h1 class="logo">Bazar Kori</h1>
+            </div>
+            <nav class="navigation">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/filter" class="nav-link">Browse & Filter</a>
+                <a href="#" class="nav-link">My Account</a>
+                <a href="#" class="nav-link basket-link">Basket(2)</a>
+            </nav>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open filters">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar Filter -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Filter Products</h2>
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        
+        <div class="filter-section">
+            <!-- Category Filter -->
+            <div class="filter-group">
+                <h3 class="filter-title">Category</h3>
+                <select class="filter-select" id="categoryFilter">
+                    <option value="">All Categories</option>
+                </select>
+            </div>
+
+            <!-- Price Range Filter -->
+            <div class="filter-group">
+                <h3 class="filter-title">Price Range</h3>
+                <div class="price-input-group">
+                    <input 
+                        type="number" 
+                        class="price-input" 
+                        id="minPrice" 
+                        placeholder="Min Price" 
+                        min="0"
+                    >
+                    <span class="price-separator">to</span>
+                    <input 
+                        type="number" 
+                        class="price-input" 
+                        id="maxPrice" 
+                        placeholder="Max Price" 
+                        min="0"
+                    >
+                </div>
+            </div>
+
+            <!-- Filter Actions -->
+            <div class="filter-actions">
+                <button class="apply-btn" id="applyFilters">
+                    Apply Filters
+                </button>
+                <button class="reset-btn" id="resetFilters">
+                    Reset Filters
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Overlay -->
+    <div class="overlay hidden" id="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h2 class="page-title">Grocery Products</h2>
+                <p class="page-subtitle">
+                    Filter products by category and price range
+                </p>
+                <button class="filter-toggle-btn" id="filterToggleBtn">
+                    Show Filters
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <div class="results-header">
+                    <h3 id="resultsTitle">All Products</h3>
+                    <span class="results-count" id="resultsCount"></span>
+                </div>
+
+                <!-- Loading Spinner -->
+                <div class="loading-spinner hidden" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+
+                <!-- Messages -->
+                <div class="no-results hidden" id="noResultsMessage">
+                    <h3>We are sorry. No matching product found.</h3>
+                    <p>Try adjusting your filters or browse all products</p>
+                </div>
+
+                <div class="error-message hidden" id="errorMessage">
+                    <h3>Unable to load products</h3>
+                    <p>Please check your connection and try again later</p>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="productsGrid"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Bazar Kori. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

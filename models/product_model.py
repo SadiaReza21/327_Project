@@ -21,6 +21,7 @@ class SearchRequestModel(BaseModel):
     max_price: Optional[float] = Field(None, ge=0, description="Maximum price filter")
 
 
+
 class SearchResponseModel(BaseModel):
     products: List[ProductModel]
     total_count: int

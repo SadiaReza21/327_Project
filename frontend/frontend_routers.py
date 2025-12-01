@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 import httpx
-from controllers import product_controller, category_controller, archived_controller
+from controllers import product_controller, category_controller, inventory_controller
 from db.database import get_db
 
 
@@ -14,11 +14,9 @@ templates = Jinja2Templates(directory="frontend")
 
 
 @router.get("/home")
-def home(request: Request):
-    r = httpx.get("http://127.0.0.1:8000/inventory/available")
-    products = r.json()
-    r = httpx.get("http://127.0.0.1:8000/categories/get_categories")
-    categories = r.json()
+def home(request: Request, db: Session = Depends(get_db)):
+    products = inventory_controller.get_products_in_inventory(db)
+    categories = category_controller.get_all_categories(db)
     return templates.TemplateResponse(
         "home_page.html",
         {"request": request, "products": products, "categories": categories},
@@ -59,4 +57,4 @@ def restock_product_modal(request: Request, product_id: int, db: Session = Depen
     return templates.TemplateResponse(
         "product_restock.html",
         {"request": request, "product": product_data}
-    )
+    ) 

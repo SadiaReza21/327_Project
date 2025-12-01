@@ -2,7 +2,6 @@ import threading
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import text
 from controllers.inventory_controller import background_inventory_loop
 from views.product_routers import router as product_router
 from views.category_routers import router as category_router
@@ -27,7 +26,6 @@ app.add_middleware(
 )
 
 app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(frontend_router)
 app.include_router(product_router)
@@ -49,4 +47,4 @@ def start_background_task():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=8001, reload=True)

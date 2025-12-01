@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bazaar Kori - {{ product.name }}</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="/static/product_details.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <h1>Bazaar Kori</h1>
+      <button>Logout</button>
+    </header>
+
+    <!-- PRODUCT INFO -->
+    <div class="container">
+      <div class="product-top">
+        <img
+          src="{{ product.image_url }}"
+          alt="{{ product.name }}"
+          class="product-img"
+        />
+
+        <div class="product-info">
+          <h2>{{ product.name }}</h2>
+          <div class="price">৳{{ product.price }}</div>
+
+          <div class="quantity">
+            <button>-</button>
+            <input type="number" value="1" min="1" />
+            <button>+</button>
+          </div>
+
+          <div class="actions">
+            <button class="buy-now">Buy Now</button>
+            <button class="add-basket">Add to Basket</button>
+          </div>
+
+          <div class="product-description">{{ product.description }}</div>
+        </div>
+      </div>
+
+      <div class="extra-info">
+        <h3>Additional Info</h3>
+        <p>Listed Time: {{ product.date_added }}</p>
+        <p>
+          Stock: Available ({{ product.stock }})
+        </p>
+        <p>Category: {{ category.category_name }}</p>
+      </div>
+    </div>
+
+    <!-- RELATED PRODUCTS -->
+    {% if related_products %}
+    <div class="related-products">
+      <h3>Related Products</h3>
+      <div class="products-grid">
+        {% for p in related_products %}
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="/static/{{ product.image_url }}"
+              alt="{{ product.name }}"
+            />
+          </div>
+          <div class="product-info">
+            <h3>{{ p.name }}</h3>
+            <p class="product-stock">
+              {% if p.is_available and p.stock > 0 %}Available{% else %}Out of
+              stock{% endif %}
+            </p>
+            <div class="product-price">৳{{ p.price }}</div>
+            <div class="product-actions">
+              <a href="/product/{{ p.product_id }}"
+                ><button class="view-details">View</button></a
+              >
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </body>
+</html>
+
+<script>
+  const quantityDiv = document.querySelector(".quantity");
+  if (quantityDiv) {
+    const input = quantityDiv.querySelector("input[type='number']");
+    const btnMinus = quantityDiv.querySelector("button:first-of-type");
+    const btnPlus = quantityDiv.querySelector("button:last-of-type");
+
+    btnMinus.addEventListener("click", () => {
+      let current = parseInt(input.value);
+      if (current > parseInt(input.min)) {
+        input.value = current - 1;
+      }
+    });
+
+    btnPlus.addEventListener("click", () => {
+      let current = parseInt(input.value);
+      input.value = current + 1;
+    });
+  }
+</script>

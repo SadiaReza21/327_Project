@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restock Product</title>
+  <link rel="stylesheet" href="static/product_restock.css">
+</head>
+<body>
+
+<div class="modal-card">
+  <h3>Restock Product</h3>
+
+  <p><strong>Name:</strong> {{ product['name'] }}</p>
+  <p><strong>Current Stock:</strong> <span id="stock">{{ product['stock'] }}</span></p>
+
+  <input type="number" id="new-stock" placeholder="Enter new stock" min="0">
+
+  <div class="btn-row">
+    <button class="add" id="update-btn">Update Stock</button>
+    <button class="close" id="close-btn">Close</button>
+  </div>
+</div>
+
+<script>
+  const stockSpan = document.getElementById("stock");
+  const newStockInput = document.getElementById("new-stock");
+
+  // Put the variable in quotes so JS always sees it as valid
+  const productId = "{{ product['product_id'] }}";
+
+  document.getElementById("update-btn").onclick = async () => {
+    const newStock = parseInt(newStockInput.value);
+    if (isNaN(newStock) || newStock < 0) {
+      alert("Enter a valid stock number");
+      return;
+    }
+
+    try {
+      await fetch(`/products/restock/${productId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ stock: newStock })
+      });
+
+      stockSpan.innerText = newStock;
+      alert("Stock updated successfully");
+      window.close();
+    } catch (err) {
+      alert("Error updating stock: " + err.message);
+    }
+  };
+
+  document.getElementById("close-btn").onclick = () => {
+    window.close();
+  };
+</script>
+
+
+</body>
+</html>

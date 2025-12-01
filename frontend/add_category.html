@@ -1,66 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Add Category</title>
-  <link rel="stylesheet" href="static/add_category.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Category</title>
+    <link rel="stylesheet" href="/static/add_category.css" />
+  </head>
 
-<body>
+  <body>
+    <!-- Modal box ONLY -->
+    <div id="modal" class="modal">
+      <div class="modal-card">
+        <input
+          id="category-input"
+          class="category-input"
+          type="text"
+          placeholder="Category name"
+          autofocus
+        />
 
-  <!-- Modal box ONLY -->
-  <div id="modal" class="modal">
-    <div class="modal-card">
-
-      <input 
-        id="category-input" 
-        class="category-input"
-        type="text" 
-        placeholder="Category name" 
-        autofocus 
-      />
-
-      <div class="btn-row">
-        <button id="add-btn" class="btn add">Add</button>
-        <button id="close-btn" class="btn close">Close</button>
+        <div class="btn-row">
+          <button id="add-btn" class="btn add">Add</button>
+          <button id="close-btn" class="btn close">Close</button>
+        </div>
       </div>
-
     </div>
-  </div>
 
-  <script>
-    const modal = document.getElementById("modal");
-    function closeModal() {
-      modal.style.display = "none";
-      if (history.length > 1) history.back();
-    }
-
-    document.getElementById("close-btn").onclick = closeModal;
-
-    document.getElementById("add-btn").onclick = async () => {
-      const name = document.getElementById("category-input").value.trim();
-      if (!name) return alert("Please enter a category name");
-
-      const resp = await fetch("/categories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category_name: name })
-      });
-
-      if (resp.ok) {
-        closeModal();   
-      } else {
-        alert("Error adding category");
+    <script>
+      const modal = document.getElementById("modal");
+      function closeModal() {
+        modal.style.display = "none";
+        if (history.length > 1) history.back();
       }
-    };
 
-    document.getElementById("category-input").addEventListener("keydown", (ev) => {
-      if (ev.key === "Enter") {
-        document.getElementById("add-btn").click();
-      }
-    });
+      document.getElementById("close-btn").onclick = closeModal;
 
-  </script>
+      document.getElementById("add-btn").onclick = async () => {
+        const name = document.getElementById("category-input").value.trim();
+        if (!name) return alert("Please enter a category name");
 
-</body>
+        const resp = await fetch("/categories", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ category_name: name }),
+        });
+
+        if (resp.ok) {
+          closeModal();
+        } else {
+          alert("Error adding category");
+        }
+      };
+
+      document
+        .getElementById("category-input")
+        .addEventListener("keydown", (ev) => {
+          if (ev.key === "Enter") {
+            document.getElementById("add-btn").click();
+          }
+        });
+    </script>
+  </body>
 </html>

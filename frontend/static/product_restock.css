@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,41 +9,86 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .modal-card {
   background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 320px;
+  padding: 30px;
+  width: 650px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-title {
+  text-align: center;
+  margin: 0;
+  font-size: 22px;
+}
+
+.restock-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start;        
+  width: 100%;                    
+  gap: 20px;                      
+}
+
+
+.product-image {
+  flex: 0 0 250px;  
+}
+
+.product-info {
+  flex: 1;          
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
 }
 
-input {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.product-info h3 {
+  margin: 0;
+  font-size: 20px;
 }
 
-.btn-row {
+.update-stock {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.update-stock input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 120px;
 }
 
-button.add {
+.update-stock button {
+  padding: 10px 18px;
   background: #007bff;
   color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
 }
 
-button.close {
-  background: #ddd;
+.close {
+  margin-top: 15px;
+  padding: 10px 18px;
+  background: #dddddd;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 100px;
 }

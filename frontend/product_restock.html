@@ -3,35 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <title>Restock Product</title>
-    <link rel="stylesheet" href="static/product_restock.css" />
+    <link rel="stylesheet" href="/static/product_restock.css" />
   </head>
+
   <body>
-    <div class="modal-card">
-      <h3>Restock Product</h3>
+    <div id="modal" class="modal">
+      <div class="modal-card">
+        <h2 class="modal-title">Restock Product</h2>
 
-      <p><strong>Name:</strong> {{ product['name'] }}</p>
-      <p>
-        <strong>Current Stock:</strong>
-        <span id="stock">{{ product['stock'] }}</span>
-      </p>
+        <div class="restock-container">
+          <!-- Product Image -->
+          <div class="product-image">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" />
+          </div>
 
-      <input
-        type="number"
-        id="new-stock"
-        placeholder="Enter new stock"
-        min="0"
-      />
+          <!-- Product Info -->
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p><strong>Price:</strong> ৳{{ product.price }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <p>
+              <strong>Current Stock:</strong>
+              <span id="stock">{{ product.stock }}</span>
+            </p>
 
-      <div class="btn-row">
-        <button class="add" id="update-btn">Update Stock</button>
-        <button class="close" id="close-btn">Close</button>
+            <!-- Update Stock Input -->
+            <div class="update-stock">
+              <input
+                type="number"
+                id="new-stock"
+                placeholder="Enter new stock"
+                min="0"
+              />
+              <button class="add" id="update-btn">Update Stock</button>
+            </div>
+
+            <button class="close" id="close-btn">Close</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <script>
+      const modal = document.getElementById("modal");
       const stockSpan = document.getElementById("stock");
       const newStockInput = document.getElementById("new-stock");
-
       const productId = "{{ product['product_id'] }}";
 
       document.getElementById("update-btn").onclick = async () => {
@@ -61,14 +77,16 @@
           stockSpan.innerText = updatedProduct.stock;
 
           alert("Stock updated successfully");
-          window.close();
+
+          newStockInput.value = ""; 
         } catch (err) {
           alert("Error updating stock: " + err.message);
         }
       };
 
       document.getElementById("close-btn").onclick = () => {
-        window.close();
+        modal.style.display = "none";
+        if (history.length > 1) history.back();
       };
     </script>
   </body>

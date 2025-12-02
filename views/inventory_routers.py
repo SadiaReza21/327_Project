@@ -28,11 +28,10 @@ class RestockRequest(BaseModel):
     """
     Request model for restocking a product.
 
-    Attributes:
+    Args:
         product_id (int): ID of the product to restock.
         additional_stock (int): Amount of stock to add (must be positive).
     """
-
     product_id: int
     additional_stock: int
 

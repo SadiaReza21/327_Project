@@ -1,20 +1,28 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
-import httpx
 from controllers import product_controller, category_controller, inventory_controller
 from db.database import get_db
 
 
 router = APIRouter()
 
-# Templates for home and products
 templates = Jinja2Templates(directory="frontend")
 
 
+# router for home page
 @router.get("/home")
 def home(request: Request, db: Session = Depends(get_db)):
+    """
+    Render the home page with available products and categories.
+
+    Args:
+        request (Request): FastAPI request object for Jinja2 templates.
+        db (Session, optional): SQLAlchemy database session (injected by Depends).
+
+    Returns:
+        HTMLResponse: Renders the home page with products and categories.
+    """
     products = inventory_controller.get_products_in_inventory(db)
     categories = category_controller.get_all_categories(db)
     return templates.TemplateResponse(
@@ -23,8 +31,20 @@ def home(request: Request, db: Session = Depends(get_db)):
     )
 
 
+# router for product details page
 @router.get("/product/{product_id}")
 def product_details(request: Request, product_id: int, db: Session = Depends(get_db)):
+    """
+    Render the product details page for a specific product.
+
+    Args:
+        request (Request): FastAPI request object for Jinja2 templates.
+        product_id (int): ID of the product to display.
+        db (Session, optional): SQLAlchemy database session (injected by Depends).
+
+    Returns:
+        HTMLResponse: Renders the product details page or a 404 page if the product is not found.
+    """
     product = product_controller.get_product_by_id(db, product_id)
     if not product:
         return templates.TemplateResponse(
@@ -32,29 +52,52 @@ def product_details(request: Request, product_id: int, db: Session = Depends(get
         )
 
     category = category_controller.get_category_by_id(db, product.category_id)
-    related_products = product_controller.fetch_products_by_category(db, product.category_id)
+    related_products = product_controller.fetch_products_by_category(
+        db, product.category_id
+    )
 
     return templates.TemplateResponse(
         "product_details.html",
-        {"request": request, "product": product, "category": category, "related_products": related_products},
+        {
+            "request": request,
+            "product": product,
+            "category": category,
+            "related_products": related_products,
+        },
     )
 
+
+# router for add category page
 @router.get("/add-category")
 def add_category(request: Request):
-    return templates.TemplateResponse(
-        "add_category.html",
-        {"request": request}
-    )    
-
-
-@router.get("/restock-product/{product_id}")
-def restock_product_modal(request: Request, product_id: int, db: Session = Depends(get_db)):
     """
-    Fetch product data and render the restock modal page.
+    Render the add category page.
+
+    Args:
+        request (Request): FastAPI request object for Jinja2 templates.
+
+    Returns:
+        HTMLResponse: Renders the add category page.
+    """
+    return templates.TemplateResponse("add_category.html", {"request": request})
+
+
+# router for restock product page
+@router.get("/restock-product/{product_id}")
+def restock_product(request: Request, product_id: int, db: Session = Depends(get_db)):
+    """
+    Render the restock product page with product data.
+
+    Args:
+        request (Request): FastAPI request object for Jinja2 templates.
+        product_id (int): ID of the product to restock.
+        db (Session, optional): SQLAlchemy database session (injected by Depends).
+
+    Returns:
+        HTMLResponse: Renders the product restock page with product information.
     """
     product_data = product_controller.get_product_by_id(db, product_id)
 
     return templates.TemplateResponse(
-        "product_restock.html",
-        {"request": request, "product": product_data}
-    ) 
+        "product_restock.html", {"request": request, "product": product_data}
+    )

@@ -8,7 +8,18 @@ from models.inventory import Inventory
 
 def sync_inventory(db: Session):
     """
-    Sync Inventory table with Product table based on availability.
+    Synchronize the Inventory table with the Product table based on product availability.
+
+    For each product:
+        - If the product is available and not in Inventory, it is added.
+        - If the product is available and already in Inventory, stock and availability are updated.
+        - If the product is unavailable and exists in Inventory, it is removed.
+
+    Args:
+        db (Session): SQLAlchemy database session.
+
+    Returns:
+        dict: A dictionary containing a message confirming the inventory has been synced.
     """
     products = db.query(Product).all()
 
@@ -16,7 +27,6 @@ def sync_inventory(db: Session):
         inv = db.query(Inventory).filter(Inventory.product_id == p.product_id).first()
 
         if p.is_available:
-            # Add if missing
             if not inv:
                 new_inv = Inventory(
                     product_id=p.product_id,
@@ -26,12 +36,10 @@ def sync_inventory(db: Session):
                 )
                 db.add(new_inv)
             else:
-                # Update values
                 inv.stock = p.stock
                 inv.is_available = p.is_available
 
         else:
-            # Product unavailable → remove from inventory
             if inv:
                 db.delete(inv)
 
@@ -41,8 +49,17 @@ def sync_inventory(db: Session):
 
 def get_products_in_inventory(db: Session):
     """
-    Return products that are both in the Products table
-    and available in the Inventory table.
+    Retrieve products that are available in both Products and Inventory tables.
+
+    Only includes products that:
+        - Are marked as available in Inventory (`is_available=True`)
+        - Have stock greater than 0 (`stock > 0`)
+
+    Args:
+        db (Session): SQLAlchemy database session.
+
+    Returns:
+        list[Product]: List of available Product objects.
     """
     products = (
         db.query(Product)
@@ -55,16 +72,21 @@ def get_products_in_inventory(db: Session):
 
 def restock_product(db: Session, product_id: int, additional_stock: int):
     """
-    Add stock to an existing product.
+    Increase the stock of an existing product.
 
     Args:
-        db (Session): SQLAlchemy session
-        product_id (int): ID of the product to restock
-        additional_stock (int): Amount of stock to add
+        db (Session): SQLAlchemy database session.
+        product_id (int): ID of the product to restock.
+        additional_stock (int): Amount of stock to add (must be positive).
 
     Returns:
-        Product: Updated product object
+        Product: The updated Product object.
+
+    Raises:
+        HTTPException: 404 if the product is not found.
+        HTTPException: 400 if the additional_stock is negative.
     """
+
     product = get_product_by_id(db, product_id)
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
@@ -76,5 +98,3 @@ def restock_product(db: Session, product_id: int, additional_stock: int):
     db.commit()
     db.refresh(product)
     return product
-
- 

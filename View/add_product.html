@@ -16,6 +16,7 @@
     </header>
 
     <div class="container glass">
+        
         <h1>Add a Product</h1>
         <p class="subtitle">Enter Product Details:</p>
 
@@ -26,15 +27,19 @@
                 placeholder="Short description preview of your product"></textarea>
             <input type="number" id="p_quantity" name="p_quantity" pattern="[0-9]+" placeholder="Product Quantity" required>
             <input type="number" step="0.01" id="p_price" name="p_price" pattern="[0-9.]+" placeholder="Price Per Unit in Taka" required>
+            
             <select id="p_category" name="p_category" class="cat_menu" required>
                 {% for cat_id, cat_name in categories.items() %}
                     <option class="cat_menu" value="{{ cat_id }}">{{ cat_name }}</option>
                 {% endfor %}
             </select>
+
             <label for="productImage">Product Image:</label>
                 <input type="file" name="product_image" accept="image/*">
                 <div id="imagePreviewContainer" class="image-preview-container"></div>
+
             <button type="submit" class="submit-btn">Add Product</button>
+
         </form>
     </div>
 </body>

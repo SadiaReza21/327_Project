@@ -12,14 +12,26 @@ from Model.product_class import Product
 templates = Jinja2Templates(directory=".")
 add_product_router = APIRouter(prefix="/r_add_product")
 
+
 @add_product_router.get("/add_product")
 def add_product(request: Request):
-    # Getting the available category list from database
+    """
+    Displays the add product page.
+
+    Args:
+        request (Request): FastAPI request object
+
+    Returns:
+        TemplateResponse: Shows add_product.html with category options 
+        from database.
+    """
     category_list = Category.get_category_dict() 
     return templates.TemplateResponse(
         "View/add_product.html", 
         {"request": request, "categories": category_list}
     )
+
+
 
 # Receives data from html form
 @add_product_router.post("/submit_product")
@@ -33,17 +45,21 @@ async def submit_product(
         product_image: UploadFile = Form(None)  
     ):
     """
-    Adds a new product to database.
+    Adds a new product to database by calling functions.
 
     Args:
         request (Request): FastAPI request object.
         p_name (str): Product name.
         p_description (str): Product description.
         p_price (str): Product price.
+        p_quantity (int): Product quantity in stock.
         p_category (str): Category id.
+        product_image (file): One image of the product
 
     Returns:
-        TemplateResponse: Rendered thank-you page.
+        TemplateResponse: Shows admin_dashbaord.html if product is added 
+        successfully. Otherwise shows the add_product.html 
+        with an error message.
     """
 
     current_milliseconds = int(time.time() * 1000)
@@ -81,7 +97,9 @@ async def submit_product(
 
         image_url = f"ProductImages/{product_id}/{image_filename}"  
 
-    new_product = Product(product_id, p_category, p_name, p_description, p_price, p_quantity, image_url, date.today(), True, False)
+    new_product = Product(
+        product_id, p_category, p_name, p_description, 
+        p_price, p_quantity, image_url, date.today(), True, False)
     result = Product.create_product(new_product)    
 
     if(result):

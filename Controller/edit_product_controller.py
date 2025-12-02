@@ -10,14 +10,31 @@ from Model.category_class import Category
 templates = Jinja2Templates(directory=".")
 edit_product_router = APIRouter(prefix="/r_edit_product")
 
+
 @edit_product_router.get("/edit_product")
 def edit_product( request: Request,  p_id: str):
+    """
+    Displays edit product page with existing product's information that was 
+    fetched by the corresponding product's id.
+
+    Args:
+        request (Request): FastAPI request object.
+        p_id (str): Product id.
+
+    Returns:
+        TemplateResponse: Shows edit_product.html with the product's existing
+        information fetched from database.
+    """
     existing_product = Product.get_product(p_id)
     category_list = Category.get_category_dict() 
     return templates.TemplateResponse(
         "View/edit_product.html", 
-        {"request": request, "product": existing_product, "categories": category_list}
+        {
+            "request": request, "product": existing_product, 
+            "categories": category_list
+        }
     )
+
 
 @edit_product_router.post("/update_product")
 async def update_product(
@@ -31,7 +48,25 @@ async def update_product(
         prev_product_image: str = Form(...),
         product_image: UploadFile = Form(None)  
     ):
-    
+    """
+    Updates an existing product's information in the database. 
+    Replaces the older image if a new one is chosen.
+
+    Args:
+        request (Request): FastAPI request object.
+        p_id (Str): Product id of the targeted product.
+        p_name (str): Product name.
+        p_description (str): Product description.
+        p_price (str): Product price.
+        p_quantity (int): Product quantity in stock.
+        p_category (str): Category id.
+        prev_product_image (str): URL of the product's existing image.
+        product_image (file): New image of the product
+
+    Returns:
+        TemplateResponse: Shows admin_dashbaord.html if update is successfull.
+        Otherwise shows edit_product.html with an error message.
+    """
     image_filename = "default.png"
     image_url = prev_product_image
 
@@ -63,7 +98,9 @@ async def update_product(
 
         image_url = f"ProductImages/{p_id}/{image_filename}"  
 
-    new_product = Product(p_id, p_category, p_name, p_description, p_price, p_quantity, image_url, date.today(), True, False)
+    new_product = Product(
+        p_id, p_category, p_name, p_description, p_price, p_quantity, 
+        image_url, date.today(), True, False)
     result = Product.update_product(new_product)
 
     if(result):
@@ -77,6 +114,7 @@ async def update_product(
         return HTMLResponse("""
             <script>
                 alert("Error: Could not update product!! Please try again!");
-                window.location.href = "/r_edit_product/edit_product?p_id={{ p_id }}"; 
+                window.location.href = 
+                    "/r_edit_product/edit_product?p_id={{ p_id }}"; 
             </script>
         """)

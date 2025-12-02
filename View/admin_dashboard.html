@@ -14,15 +14,18 @@
     <div class="title">Bazar Kori <span>(Admin)</span></div>
     <div class="header-buttons">
         <a href="/r_add_product/add_product"><button class="btn primary">Add Product</button></a>
+        <a href="/r_add_product/add_product"><button class="btn primary">Add New Category</button></a>
         <button class="btn danger">Logout</button>
     </div>
 </header>
 
 <section class="dashboard">
+
     <h2>Dashboard</h2>
 
     <!-- Added Products Section -->
     <div class="section-block glass">
+
         <h3>Your Products</h3>
         <div class="product-grid">
 
@@ -44,18 +47,20 @@
                 </p>
 
                 <div class="actions">
+
                     <!-- Edit Button -->
                     <form method="get" action="/r_edit_product/edit_product">
                         <input type="hidden" name="p_id" value="{{ product.product_id }}">
-                        <button type="submit" class="edit">✎</button>
+                        <button type="submit" class="edit">Edit ✎</button>
                     </form>
 
                     <!-- Archive Button -->
                     <form method="post" action="/r_archive_product/archive_product"
                         onsubmit="return confirm('Archive this product? Buyers will not see it.')">
                         <input type="hidden" name="p_id" value="{{ product.product_id }}">
-                        <button type="submit" class="archive">🗃️</button>
+                        <button type="submit" class="archive">Archive 🗃️</button>
                     </form>
+
                 </div>
 
             </div>
@@ -66,6 +71,7 @@
 
     <!-- Archived Products Section -->
     <div class="section-block glass">
+
         <h3>Your Archived Products</h3>
         <div class="product-grid">
 
@@ -87,16 +93,20 @@
                 </p>
 
                 <div class="actions">
+
                     <!-- Unarchive Button -->
                     <form method="post" action="/r_archive_product/unarchive_product"
                         onsubmit="return confirm('Unarchive this product? It becomes visible to buyers.')">
                         <input type="hidden" name="p_id" value="{{ product.product_id }}">
-                        <button type="submit" class="archive">⤴</button>
+                        <button type="submit" class="archive">Unarchive</button>
+                        <button type="submit" class="archive">Restock </button>
                     </form>
+
                 </div>
 
             </div>
             {% endfor %}
+            
         </div>
     </div>
 

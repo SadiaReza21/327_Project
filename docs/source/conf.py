@@ -6,10 +6,15 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Bazar_Kori'
+import os
+import sys
+os.environ["SPHINX_BUILD"] = "true"
+sys.path.insert(0, os.path.abspath('../..'))
+
+project = 'Bazar Kori'
 copyright = '2025, Fariha Tasnim Pragga'
 author = 'Fariha Tasnim Pragga'
-release = '0.1.0'
+release = '1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -17,20 +22,11 @@ release = '0.1.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
-    'sphinx_autodoc_typehints',     
-    'sphinx_autoapi.extension',     
-    'sphinxcontrib.openapi',       
-    'sphinxcontrib.redoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.viewcode',
 ]
 
-autoapi_type = 'python'
-autoapi_dirs = ['../../']  
-autoapi_keep_files = True
-autoapi_generate_api_docs = True
-
-import os
-import sys
-sys.path.insert(0, os.path.abspath('../..'))
+autosummary_generate = True
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -40,5 +36,5 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'alabaster'
 html_static_path = ['_static']

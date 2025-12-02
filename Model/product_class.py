@@ -113,6 +113,39 @@ class Product:
 
 
     @staticmethod
+    def delete_product(product_id: str) -> bool:
+        """
+        Delete product's information from the database.
+
+        Args:
+            product_id (str): The id of the product that needs to be deleted.
+
+        Returns:
+            bool: True if deletion was successfull and False otherwise.
+        """
+        conn = None
+        cursor = None
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            sql = "DELETE from products WHERE product_id = %s"
+            value = (product_id,)
+            cursor.execute(sql, value)
+            conn.commit()
+            return True
+
+        except Error as e:
+            print(f"Error deleting product: {e}")
+            return False
+
+        finally:
+            if cursor:
+                cursor.close()
+            if conn and conn.is_connected():
+                conn.close()
+
+
+    @staticmethod
     def get_product(product_id: str) -> "Product":
         """
         Returns a product object for a specific product_id.
@@ -257,7 +290,7 @@ class Product:
             conn = get_db_connection()
             cursor = conn.cursor()
             sql = """
-                UPDATE products SET is_archived = True WHERE product_id = %s
+                UPDATE products SET is_archived = True, stock = 0 WHERE product_id = %s
             """    
             value = (product_id,)   
             cursor.execute(sql, value)

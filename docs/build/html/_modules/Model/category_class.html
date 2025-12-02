@@ -38,16 +38,19 @@
 <a class="viewcode-back" href="../../Model.html#Model.category_class.Category">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Category</span><span class="p">:</span>
 
+
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">category_id</span> <span class="o">=</span> <span class="nb">id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">name</span>
+
 
 <div class="viewcode-block" id="Category.get_category_dict">
 <a class="viewcode-back" href="../../Model.html#Model.category_class.Category.get_category_dict">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_category_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Fetches all category id - name pair from the database and returns them as a dictionary.</span>
+<span class="sd">        Fetches all category id - name pair from the database and returns </span>
+<span class="sd">        them as a dictionary.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            TemplateResponse: Returns a dictionary of category id - name pair.</span>
@@ -101,6 +104,12 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Bazar_Kori_Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Controller.html">Controller package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Model.html">Model package</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>

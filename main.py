@@ -7,6 +7,7 @@ from Model.product_class import Product
 from Controller.add_product_controller import add_product_router
 from Controller.archive_product_controller import archive_product_router
 from Controller.edit_product_controller import edit_product_router
+from Controller.delete_product_controller import delete_product_router
 import os
 
 
@@ -16,6 +17,7 @@ if "SPHINX_BUILD" not in os.environ:
     app.include_router(add_product_router)
     app.include_router(archive_product_router)
     app.include_router(edit_product_router)
+    app.include_router(delete_product_router)
 
     templates = Jinja2Templates(directory="View")
 

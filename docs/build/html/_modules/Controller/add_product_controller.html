@@ -45,6 +45,7 @@
 <span class="n">templates</span> <span class="o">=</span> <span class="n">Jinja2Templates</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 <span class="n">add_product_router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/r_add_product&quot;</span><span class="p">)</span>
 
+
 <div class="viewcode-block" id="add_product">
 <a class="viewcode-back" href="../../Controller.html#Controller.add_product_controller.add_product">[docs]</a>
 <span class="nd">@add_product_router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/add_product&quot;</span><span class="p">)</span>
@@ -56,13 +57,16 @@
 <span class="sd">        request (Request): FastAPI request object</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        TemplateResponse: Shows add_product.html with category options from database.</span>
+<span class="sd">        TemplateResponse: Shows add_product.html with category options </span>
+<span class="sd">        from database.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">category_list</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">get_category_dict</span><span class="p">()</span> 
     <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span>
         <span class="s2">&quot;View/add_product.html&quot;</span><span class="p">,</span> 
         <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="n">category_list</span><span class="p">}</span>
     <span class="p">)</span></div>
+
+
 
 
 <span class="c1"># Receives data from html form</span>
@@ -91,7 +95,9 @@
 <span class="sd">        product_image (file): One image of the product</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        TemplateResponse: Shows admin_dashbaord.html if product is added successfully. Otherwise shows the add_product.html with an error message.</span>
+<span class="sd">        TemplateResponse: Shows admin_dashbaord.html if product is added </span>
+<span class="sd">        successfully. Otherwise shows the add_product.html </span>
+<span class="sd">        with an error message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">current_milliseconds</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
@@ -129,7 +135,9 @@
 
         <span class="n">image_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ProductImages/</span><span class="si">{</span><span class="n">product_id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image_filename</span><span class="si">}</span><span class="s2">&quot;</span>  
 
-    <span class="n">new_product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="n">product_id</span><span class="p">,</span> <span class="n">p_category</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">p_description</span><span class="p">,</span> <span class="n">p_price</span><span class="p">,</span> <span class="n">p_quantity</span><span class="p">,</span> <span class="n">image_url</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">new_product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span>
+        <span class="n">product_id</span><span class="p">,</span> <span class="n">p_category</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">p_description</span><span class="p">,</span> 
+        <span class="n">p_price</span><span class="p">,</span> <span class="n">p_quantity</span><span class="p">,</span> <span class="n">image_url</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">create_product</span><span class="p">(</span><span class="n">new_product</span><span class="p">)</span>    
 
     <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
@@ -179,6 +187,12 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Bazar_Kori_Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Controller.html">Controller package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Model.html">Model package</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>

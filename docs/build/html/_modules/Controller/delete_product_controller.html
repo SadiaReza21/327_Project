@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Controller.archive_product_controller &#8212; Bazar Kori 1.0 documentation</title>
+    <title>Controller.delete_product_controller &#8212; Bazar Kori 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
@@ -30,7 +30,7 @@
 
           <div class="body" role="main">
             
-  <h1>Source code for Controller.archive_product_controller</h1><div class="highlight"><pre>
+  <h1>Source code for Controller.delete_product_controller</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">Form</span><span class="p">,</span> <span class="n">Request</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTMLResponse</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.templating</span><span class="w"> </span><span class="kn">import</span> <span class="n">Jinja2Templates</span>
@@ -38,15 +38,15 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">Model.product_class</span><span class="w"> </span><span class="kn">import</span> <span class="n">Product</span>
 
 <span class="n">templates</span> <span class="o">=</span> <span class="n">Jinja2Templates</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
-<span class="n">archive_product_router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/r_archive_product&quot;</span><span class="p">)</span>
+<span class="n">delete_product_router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/r_delete_product&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="archive_product">
-<a class="viewcode-back" href="../../Controller.html#Controller.archive_product_controller.archive_product">[docs]</a>
-<span class="nd">@archive_product_router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/archive_product&quot;</span><span class="p">)</span>
+<a class="viewcode-back" href="../../Controller.html#Controller.delete_product_controller.archive_product">[docs]</a>
+<span class="nd">@delete_product_router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/delete_product&quot;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">archive_product</span><span class="p">(</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>  <span class="n">p_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(</span><span class="o">...</span><span class="p">)):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Archives a product in the database.</span>
+<span class="sd">    Deleted the product from the database.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        request (Request): FastAPI request object.</span>
@@ -56,51 +56,18 @@
 <span class="sd">        TemplateResponse: Shows admin_dashbaord.html with success </span>
 <span class="sd">        message or error message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">archive_product</span><span class="p">(</span><span class="n">p_id</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">delete_product</span><span class="p">(</span><span class="n">p_id</span><span class="p">)</span>
     <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">                &lt;script&gt;</span>
-<span class="s2">                    alert(&quot;Product archived successfully!!&quot;);</span>
+<span class="s2">                    alert(&quot;Product deleted successfully!!&quot;);</span>
 <span class="s2">                    window.location.href = &quot;/&quot;; </span>
 <span class="s2">                &lt;/script&gt;</span>
 <span class="s2">            &quot;&quot;&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">                &lt;script&gt;</span>
-<span class="s2">                    alert(&quot;Error: Product archiving failed!!&quot;);</span>
-<span class="s2">                    window.location.href = &quot;/&quot;; </span>
-<span class="s2">                &lt;/script&gt;</span>
-<span class="s2">            &quot;&quot;&quot;</span><span class="p">)</span></div>
-
-    
-
-<div class="viewcode-block" id="unarchive_product">
-<a class="viewcode-back" href="../../Controller.html#Controller.archive_product_controller.unarchive_product">[docs]</a>
-<span class="nd">@archive_product_router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/unarchive_product&quot;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">unarchive_product</span><span class="p">(</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>  <span class="n">p_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(</span><span class="o">...</span><span class="p">)):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Unarchives a product in the database.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        request (Request): FastAPI request object.</span>
-<span class="sd">        p_id (str): Product id.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        TemplateResponse: Shows admin_dashbaord.html with success message</span>
-<span class="sd">        or error message.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">unarchive_product</span><span class="p">(</span><span class="n">p_id</span><span class="p">)</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">                &lt;script&gt;</span>
-<span class="s2">                    alert(&quot;Product unarchived successfully!!&quot;);</span>
-<span class="s2">                    window.location.href = &quot;/&quot;; </span>
-<span class="s2">                &lt;/script&gt;</span>
-<span class="s2">            &quot;&quot;&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">                &lt;script&gt;</span>
-<span class="s2">                    alert(&quot;Error: Product unarchiving failed!!&quot;);</span>
+<span class="s2">                    alert(&quot;Error: Product deletion failed!!&quot;);</span>
 <span class="s2">                    window.location.href = &quot;/&quot;; </span>
 <span class="s2">                &lt;/script&gt;</span>
 <span class="s2">            &quot;&quot;&quot;</span><span class="p">)</span></div>

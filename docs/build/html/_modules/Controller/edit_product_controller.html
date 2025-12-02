@@ -43,26 +43,33 @@
 <span class="n">templates</span> <span class="o">=</span> <span class="n">Jinja2Templates</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 <span class="n">edit_product_router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/r_edit_product&quot;</span><span class="p">)</span>
 
+
 <div class="viewcode-block" id="edit_product">
 <a class="viewcode-back" href="../../Controller.html#Controller.edit_product_controller.edit_product">[docs]</a>
 <span class="nd">@edit_product_router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/edit_product&quot;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">edit_product</span><span class="p">(</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>  <span class="n">p_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Displays edit product page with existing product&#39;s information that was fetched by the corresponding product&#39;s id.</span>
+<span class="sd">    Displays edit product page with existing product&#39;s information that was </span>
+<span class="sd">    fetched by the corresponding product&#39;s id.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        request (Request): FastAPI request object.</span>
 <span class="sd">        p_id (str): Product id.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        TemplateResponse: Shows edit_product.html with the product&#39;s existing information fetched from database.</span>
+<span class="sd">        TemplateResponse: Shows edit_product.html with the product&#39;s existing</span>
+<span class="sd">        information fetched from database.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">existing_product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">get_product</span><span class="p">(</span><span class="n">p_id</span><span class="p">)</span>
     <span class="n">category_list</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">get_category_dict</span><span class="p">()</span> 
     <span class="k">return</span> <span class="n">templates</span><span class="o">.</span><span class="n">TemplateResponse</span><span class="p">(</span>
         <span class="s2">&quot;View/edit_product.html&quot;</span><span class="p">,</span> 
-        <span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="n">existing_product</span><span class="p">,</span> <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="n">category_list</span><span class="p">}</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="n">existing_product</span><span class="p">,</span> 
+            <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="n">category_list</span>
+        <span class="p">}</span>
     <span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="update_product">
@@ -80,7 +87,8 @@
         <span class="n">product_image</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  
     <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Updates an existing product&#39;s information in the database. Replaces the older image if a new one is chosen.</span>
+<span class="sd">    Updates an existing product&#39;s information in the database. </span>
+<span class="sd">    Replaces the older image if a new one is chosen.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        request (Request): FastAPI request object.</span>
@@ -94,7 +102,8 @@
 <span class="sd">        product_image (file): New image of the product</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        TemplateResponse: Shows admin_dashbaord.html if update is successfull. Otherwise shows edit_product.html with an error message.</span>
+<span class="sd">        TemplateResponse: Shows admin_dashbaord.html if update is successfull.</span>
+<span class="sd">        Otherwise shows edit_product.html with an error message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">image_filename</span> <span class="o">=</span> <span class="s2">&quot;default.png&quot;</span>
     <span class="n">image_url</span> <span class="o">=</span> <span class="n">prev_product_image</span>
@@ -127,7 +136,9 @@
 
         <span class="n">image_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ProductImages/</span><span class="si">{</span><span class="n">p_id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image_filename</span><span class="si">}</span><span class="s2">&quot;</span>  
 
-    <span class="n">new_product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="n">p_id</span><span class="p">,</span> <span class="n">p_category</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">p_description</span><span class="p">,</span> <span class="n">p_price</span><span class="p">,</span> <span class="n">p_quantity</span><span class="p">,</span> <span class="n">image_url</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">new_product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span>
+        <span class="n">p_id</span><span class="p">,</span> <span class="n">p_category</span><span class="p">,</span> <span class="n">p_name</span><span class="p">,</span> <span class="n">p_description</span><span class="p">,</span> <span class="n">p_price</span><span class="p">,</span> <span class="n">p_quantity</span><span class="p">,</span> 
+        <span class="n">image_url</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">update_product</span><span class="p">(</span><span class="n">new_product</span><span class="p">)</span>
 
     <span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
@@ -141,7 +152,8 @@
         <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">            &lt;script&gt;</span>
 <span class="s2">                alert(&quot;Error: Could not update product!! Please try again!&quot;);</span>
-<span class="s2">                window.location.href = &quot;/r_edit_product/edit_product?p_id={{ p_id }}&quot;; </span>
+<span class="s2">                window.location.href = </span>
+<span class="s2">                    &quot;/r_edit_product/edit_product?p_id={{ p_id }}&quot;; </span>
 <span class="s2">            &lt;/script&gt;</span>
 <span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span></div>
 
@@ -172,6 +184,12 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Bazar_Kori_Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Controller.html">Controller package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Model.html">Model package</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>

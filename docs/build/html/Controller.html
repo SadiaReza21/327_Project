@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Model package" href="Model.html" />
-    <link rel="prev" title="main module" href="main.html" />
+    <link rel="prev" title="Bazar_Kori_Project" href="modules.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -49,7 +49,8 @@
 <dd class="field-odd"><p><strong>request</strong> (<em>Request</em>) – FastAPI request object</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Shows add_product.html with category options from database.</p>
+<dd class="field-even"><p>Shows add_product.html with category options
+from database.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TemplateResponse</p>
@@ -74,7 +75,9 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Shows admin_dashbaord.html if product is added successfully. Otherwise shows the add_product.html with an error message.</p>
+<dd class="field-even"><p>Shows admin_dashbaord.html if product is added
+successfully. Otherwise shows the add_product.html
+with an error message.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TemplateResponse</p>
@@ -97,7 +100,8 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Shows admin_dashbaord.html with success message or error message.</p>
+<dd class="field-even"><p>Shows admin_dashbaord.html with success
+message or error message.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TemplateResponse</p>
@@ -117,7 +121,32 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Shows admin_dashbaord.html with success message or error message.</p>
+<dd class="field-even"><p>Shows admin_dashbaord.html with success message
+or error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TemplateResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-Controller.delete_product_controller">
+<span id="controller-delete-product-controller-module"></span><h2>Controller.delete_product_controller module<a class="headerlink" href="#module-Controller.delete_product_controller" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Controller.delete_product_controller.archive_product">
+<span class="sig-prename descclassname"><span class="pre">Controller.delete_product_controller.</span></span><span class="sig-name descname"><span class="pre">archive_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Controller/delete_product_controller.html#archive_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Controller.delete_product_controller.archive_product" title="Link to this definition">¶</a></dt>
+<dd><p>Deleted the product from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>Request</em>) – FastAPI request object.</p></li>
+<li><p><strong>p_id</strong> (<em>str</em>) – Product id.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Shows admin_dashbaord.html with success
+message or error message.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TemplateResponse</p>
@@ -131,7 +160,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="Controller.edit_product_controller.edit_product">
 <span class="sig-prename descclassname"><span class="pre">Controller.edit_product_controller.</span></span><span class="sig-name descname"><span class="pre">edit_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Controller/edit_product_controller.html#edit_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Controller.edit_product_controller.edit_product" title="Link to this definition">¶</a></dt>
-<dd><p>Displays edit product page with existing product’s information that was fetched by the corresponding product’s id.</p>
+<dd><p>Displays edit product page with existing product’s information that was
+fetched by the corresponding product’s id.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -140,7 +170,8 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Shows edit_product.html with the product’s existing information fetched from database.</p>
+<dd class="field-even"><p>Shows edit_product.html with the product’s existing
+information fetched from database.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TemplateResponse</p>
@@ -151,7 +182,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="Controller.edit_product_controller.update_product">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Controller.edit_product_controller.</span></span><span class="sig-name descname"><span class="pre">update_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_product_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UploadFile</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Form(None)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Controller/edit_product_controller.html#update_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Controller.edit_product_controller.update_product" title="Link to this definition">¶</a></dt>
-<dd><p>Updates an existing product’s information in the database. Replaces the older image if a new one is chosen.</p>
+<dd><p>Updates an existing product’s information in the database.
+Replaces the older image if a new one is chosen.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -167,7 +199,8 @@
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Shows admin_dashbaord.html if update is successfull. Otherwise shows edit_product.html with an error message.</p>
+<dd class="field-even"><p>Shows admin_dashbaord.html if update is successfull.
+Otherwise shows edit_product.html with an error message.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TemplateResponse</p>
@@ -209,11 +242,18 @@
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Bazar_Kori_Project</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Bazar_Kori_Project</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Controller package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Model.html">Model package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database_connection.html">database_connection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Controller package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-Controller.add_product_controller">Controller.add_product_controller module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-Controller.archive_product_controller">Controller.archive_product_controller module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-Controller.delete_product_controller">Controller.delete_product_controller module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-Controller.edit_product_controller">Controller.edit_product_controller module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-Controller">Module contents</a></li>
 </ul>
@@ -225,8 +265,10 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="main.html" title="previous chapter">main module</a></li>
+  <li><a href="modules.html">Bazar_Kori_Project</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">Bazar_Kori_Project</a></li>
       <li>Next: <a href="Model.html" title="next chapter">Model package</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>

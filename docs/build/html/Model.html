@@ -46,7 +46,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Model.category_class.Category.get_category_dict">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_category_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/Model/category_class.html#Category.get_category_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Model.category_class.Category.get_category_dict" title="Link to this definition">¶</a></dt>
-<dd><p>Fetches all category id - name pair from the database and returns them as a dictionary.</p>
+<dd><p>Fetches all category id - name pair from the database and returns
+them as a dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Returns a dictionary of category id - name pair.</p>
@@ -69,7 +70,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Model.product_class.Product.archive_product">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">archive_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/Model/product_class.html#Product.archive_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Model.product_class.Product.archive_product" title="Link to this definition">¶</a></dt>
-<dd><p>Archives a product by changing is_archived value to True in product table and adding that product to archived table in database.</p>
+<dd><p>Archives a product by changing is_archived value to True in
+product table and adding that product to archived table in database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>product_id</strong> (<em>str</em>) – The product’s id that needs to be archived.</p>
@@ -89,10 +91,30 @@
 <dd><p>Insert a new product’s information in the database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>product</strong> (<a class="reference internal" href="#Model.product_class.Product" title="Model.product_class.Product"><em>Product</em></a>) – A product object holding the new product’s information.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>product</strong> (<a class="reference internal" href="#Model.product_class.Product" title="Model.product_class.Product"><em>Product</em></a>) – A product object holding the new</p></li>
+<li><p><strong>information.</strong> (<em>product's</em>)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if insertion was successfull and False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Model.product_class.Product.delete_product">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/Model/product_class.html#Product.delete_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Model.product_class.Product.delete_product" title="Link to this definition">¶</a></dt>
+<dd><p>Delete product’s information from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>product_id</strong> (<em>str</em>) – The id of the product that needs to be deleted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if deletion was successfull and False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -106,7 +128,8 @@
 <dd><p>Returns a list of product objects which are archived.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of product objects that are archived, fetched from database by left joining products and archived table.</p>
+<dd class="field-odd"><p>List of product objects that are archived, fetched from
+database by left joining products and archived table.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>List</p>
@@ -123,7 +146,8 @@
 <dd class="field-odd"><p><strong>product_id</strong> (<em>str</em>) – Product id of the desired product.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A product object holding that desired product’s information, fetched form the database.</p>
+<dd class="field-even"><p>A product object holding that desired product’s
+information, fetched form the database.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#Model.product_class.Product" title="Model.product_class.Product">Product</a></p>
@@ -137,7 +161,8 @@
 <dd><p>Returns a list of product objects which are unarchived.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of product objects that are not archived, fetched from database.</p>
+<dd class="field-odd"><p>List of product objects that are not archived,
+fetched from database.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>List</p>
@@ -148,8 +173,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="Model.product_class.Product.unarchive_product">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unarchive_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/Model/product_class.html#Product.unarchive_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Model.product_class.Product.unarchive_product" title="Link to this definition">¶</a></dt>
-<dd><p>Unarchives a product by changing is_archived value to False in product table
-and deleting that product from archived table.</p>
+<dd><p>Unarchives a product by changing is_archived value to False in
+product table and deleting that product from archived table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>product_id</strong> (<em>str</em>) – The product’s id that needs to be unarchived.</p>
@@ -169,7 +194,10 @@ and deleting that product from archived table.</p>
 <dd><p>Updates product’s information in the database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>product</strong> (<a class="reference internal" href="#Model.product_class.Product" title="Model.product_class.Product"><em>Product</em></a>) – A product object holding the product’s new information.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>product</strong> (<a class="reference internal" href="#Model.product_class.Product" title="Model.product_class.Product"><em>Product</em></a>) – A product object holding the product’s</p></li>
+<li><p><strong>information.</strong> (<em>new</em>)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if update was successfull and False otherwise.</p>

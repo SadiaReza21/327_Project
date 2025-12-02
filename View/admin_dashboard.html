@@ -14,7 +14,7 @@
     <div class="title">Bazar Kori <span>(Admin)</span></div>
     <div class="header-buttons">
         <a href="/r_add_product/add_product"><button class="btn primary">Add Product</button></a>
-        <a href="/r_add_product/add_product"><button class="btn primary">Add New Category</button></a>
+        <a href="http://127.0.0.1:8001/add-category"><button class="btn primary">Add New Category</button></a>
         <button class="btn danger">Logout</button>
     </div>
 </header>
@@ -61,6 +61,13 @@
                         <button type="submit" class="archive">Archive 🗃️</button>
                     </form>
 
+                    <!-- Delete Button -->
+                    <form method="post" action="/r_delete_product/delete_product"
+                        onsubmit="return confirm('Are you sure you want to delete this product from the website?')">
+                        <input type="hidden" name="p_id" value="{{ product.product_id }}">
+                        <button type="submit" class="archive">Delete 🗑</button>
+                    </form>
+
                 </div>
 
             </div>
@@ -94,11 +101,11 @@
 
                 <div class="actions">
 
-                    <!-- Unarchive Button -->
-                    <form method="post" action="/r_archive_product/unarchive_product"
+                    <!-- Restock Button -->
+                    <form method="post" action="http://127.0.0.1:8001/restock-product/{{ product.product_id }}" 
                         onsubmit="return confirm('Unarchive this product? It becomes visible to buyers.')">
                         <input type="hidden" name="p_id" value="{{ product.product_id }}">
-                        <button type="submit" class="archive">Unarchive</button>
+                        <!-- <button type="submit" class="archive">Unarchive</button> -->
                         <button type="submit" class="archive">Restock </button>
                     </form>
 

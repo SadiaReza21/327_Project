@@ -7,12 +7,10 @@ def sync_archive(db: Session):
     """
     Synchronize the Archived table based on the Product table's archive status.
 
-    Iterates through all products and ensures the Archived table
-    reflects the current state:
-      - If a product is marked as archived (`is_archived=True`) but not in
-        the Archived table, it is added.
-      - If a product is available again (`is_available=True`) and exists in
-        the Archived table, it is removed.
+    Iterates through all products and ensures the Archived table reflects the current state:
+
+    - If a product is marked as archived (`is_archived=True`) but not in the Archived table, it is added.
+    - If a product is available again (`is_available=True`) and exists in the Archived table, it is removed.
 
     Args:
         db (Session): SQLAlchemy database session.

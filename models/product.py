@@ -16,7 +16,6 @@ class Product(Base):
     is_available: Mapped[bool] = mapped_column(Boolean, default=True)
     is_archived: Mapped[bool] = mapped_column(Boolean, default=False)
 
-    # Category relationship
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.category_id"))
     category = relationship("Category", back_populates="products")
 

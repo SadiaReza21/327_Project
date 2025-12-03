@@ -1,6 +1,7 @@
+from contextlib import asynccontextmanager
 import threading
 import time
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from controllers.archived_controller import sync_archive
@@ -12,34 +13,6 @@ from views.category_routers import router as category_router
 from views.inventory_routers import router as inventory_router
 from frontend.frontend_routers import router as frontend_router
 
-
-app = FastAPI(
-    title="My FastAPI App",
-    description="This is a sample FastAPI application.",
-    version="1.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc",
-)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],          # Allow all origins
-    allow_credentials=True,
-    allow_methods=["*"],          # Allow all HTTP methods
-    allow_headers=["*"],          # Allow all headers
-)
-
-app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
-
-app.include_router(frontend_router)
-app.include_router(product_router)
-app.include_router(category_router)
-app.include_router(inventory_router)
-
-
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to Bazar Kori API"}
 
 def background_sync_loop():
     """Runs checker, inventory sync, and archive sync every 5 seconds."""
@@ -55,13 +28,42 @@ def background_sync_loop():
         time.sleep(5)
 
 
-@app.on_event("startup")
-def start_background_task():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     thread = threading.Thread(target=background_sync_loop, daemon=True)
     thread.start()
+    yield
 
+
+app = FastAPI(
+    title="Bazar Kori",
+    description="This is a grocery shopping application",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.mount(
+    "/ProductImages", StaticFiles(directory="ProductImages"), name="ProductImages"
+)
+app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
+
+app.include_router(frontend_router)
+app.include_router(product_router)
+app.include_router(category_router)
+app.include_router(inventory_router)
 
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8001, reload=True)

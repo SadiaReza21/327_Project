@@ -24,40 +24,40 @@
         </div>
       </div>
     </div>
-
-    <script>
-      const modal = document.getElementById("modal");
-      function closeModal() {
-        modal.style.display = "none";
-        if (history.length > 1) history.back();
-      }
-
-      document.getElementById("close-btn").onclick = closeModal;
-
-      document.getElementById("add-btn").onclick = async () => {
-        const name = document.getElementById("category-input").value.trim();
-        if (!name) return alert("Please enter a category name");
-
-        const resp = await fetch("/categories", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ category_name: name }),
-        });
-
-        if (resp.ok) {
-          closeModal();
-        } else {
-          alert("Error adding category");
-        }
-      };
-
-      document
-        .getElementById("category-input")
-        .addEventListener("keydown", (ev) => {
-          if (ev.key === "Enter") {
-            document.getElementById("add-btn").click();
-          }
-        });
-    </script>
   </body>
 </html>
+
+<script>
+  const modal = document.getElementById("modal");
+  function closeModal() {
+    modal.style.display = "none";
+    if (history.length > 1) history.back();
+  }
+
+  document.getElementById("close-btn").onclick = closeModal;
+
+  document.getElementById("add-btn").onclick = async () => {
+    const name = document.getElementById("category-input").value.trim();
+    if (!name) return alert("Please enter a category name");
+
+    const resp = await fetch("/categories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ category_name: name }),
+    });
+
+    if (resp.ok) {
+      closeModal();
+    } else {
+      alert("Error adding category");
+    }
+  };
+
+  document
+    .getElementById("category-input")
+    .addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter") {
+        document.getElementById("add-btn").click();
+      }
+    });
+</script>

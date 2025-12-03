@@ -19,14 +19,20 @@
     <!-- HEADER -->
     <header>
       <h1>Bazaar Kori</h1>
-      <button>Logout</button>
+
+      <div class="header-right">
+        <a href="http://127.0.0.1:8004/cart_page/{{ buyer_id }}" id="cart-btn">
+          🛒 Cart
+        </a>
+        <a href="http://127.0.0.1:8002/buyer-login" id="logout-btn">Logout</a>
+      </div>
     </header>
 
     <!-- PRODUCT INFO -->
     <div class="container">
       <div class="product-top">
         <img
-          src="{{ product.image_url }}"
+          src="/{{ product.image_url }}"
           alt="{{ product.name }}"
           class="product-img"
         />
@@ -43,7 +49,12 @@
 
           <div class="actions">
             <button class="buy-now">Buy Now</button>
-            <button class="add-basket">Add to Basket</button>
+            <button
+              class="add-to-cart"
+              data-product-id="{{ product.product_id }}"
+            >
+              Add to Cart
+            </button>
           </div>
 
           <div class="product-description">{{ product.description }}</div>
@@ -52,10 +63,8 @@
 
       <div class="extra-info">
         <h3>Additional Info</h3>
-        <p>Listed Time: {{ product.date_added }}</p>
-        <p>
-          Stock: Available ({{ product.stock }})
-        </p>
+        <p>Listed On: {{ product.date_added }}</p>
+        <p>Stock: Available ({{ product.stock }})</p>
         <p>Category: {{ category.category_name }}</p>
       </div>
     </div>
@@ -68,10 +77,7 @@
         {% for p in related_products %}
         <div class="product-card">
           <div class="product-image">
-            <img
-              src="/static/{{ product.image_url }}"
-              alt="{{ product.name }}"
-            />
+            <img src="/{{ p.image_url }}" alt="{{ p.name }}" />
           </div>
           <div class="product-info">
             <h3>{{ p.name }}</h3>
@@ -81,10 +87,12 @@
             </p>
             <div class="product-price">৳{{ p.price }}</div>
             <div class="product-actions">
-              <a href="/product/{{ p.product_id }}"
+              <a href="/product/{{ p.product_id }}/?buyer_id={{ buyer_id }}"
                 ><button class="view-details">View</button></a
               >
-              <button class="add-to-cart">Add to Cart</button>
+              <button class="add-to-cart" data-product-id="{{ p.product_id }}">
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
@@ -96,22 +104,43 @@
 </html>
 
 <script>
-  const quantityDiv = document.querySelector(".quantity");
-  if (quantityDiv) {
-    const input = quantityDiv.querySelector("input[type='number']");
-    const btnMinus = quantityDiv.querySelector("button:first-of-type");
-    const btnPlus = quantityDiv.querySelector("button:last-of-type");
+  const addToCartButtons = document.querySelectorAll(".add-to-cart");
 
-    btnMinus.addEventListener("click", () => {
-      let current = parseInt(input.value);
-      if (current > parseInt(input.min)) {
-        input.value = current - 1;
+  addToCartButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const productId = button.dataset.productId;
+
+      let quantity = 1;
+      const mainQuantityInput = document.querySelector(".quantity input");
+
+      if (mainQuantityInput && button.closest(".product-info")) {
+        quantity = parseInt(mainQuantityInput.value);
+      }
+
+      const buyerId = Number("{{ buyer_id }} ");
+
+      try {
+        const res = await fetch("http://127.0.0.1:8004/carts/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            buyer_id: buyerId,
+            product_id: productId,
+            quantity: quantity,
+          }),
+        });
+
+        if (!res.ok) {
+          const data = await res.json();
+          alert("Failed: " + data.detail);
+          return;
+        }
+
+        alert("Added to cart!");
+      } catch (err) {
+        console.error(err);
+        alert("Error adding to cart");
       }
     });
-
-    btnPlus.addEventListener("click", () => {
-      let current = parseInt(input.value);
-      input.value = current + 1;
-    });
-  }
+  });
 </script>

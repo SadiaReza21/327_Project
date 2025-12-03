@@ -12,11 +12,6 @@
         <h2 class="modal-title">Restock Product</h2>
 
         <div class="restock-container">
-          <!-- Product Image -->
-          <div class="product-image">
-            <img src="{{ product.image_url }}" alt="{{ product.name }}" />
-          </div>
-
           <!-- Product Info -->
           <div class="product-info">
             <h3>{{ product.name }}</h3>
@@ -43,51 +38,51 @@
         </div>
       </div>
     </div>
-
-    <script>
-      const modal = document.getElementById("modal");
-      const stockSpan = document.getElementById("stock");
-      const newStockInput = document.getElementById("new-stock");
-      const productId = "{{ product['product_id'] }}";
-
-      document.getElementById("update-btn").onclick = async () => {
-        const additionalStock = parseInt(newStockInput.value);
-        if (isNaN(additionalStock) || additionalStock <= 0) {
-          alert("Enter a valid stock number greater than 0");
-          return;
-        }
-
-        try {
-          const response = await fetch(`/inventories/restock`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              product_id: productId,
-              additional_stock: additionalStock,
-            }),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || "Unknown error");
-          }
-
-          const updatedProduct = await response.json();
-
-          stockSpan.innerText = updatedProduct.stock;
-
-          alert("Stock updated successfully");
-
-          newStockInput.value = ""; 
-        } catch (err) {
-          alert("Error updating stock: " + err.message);
-        }
-      };
-
-      document.getElementById("close-btn").onclick = () => {
-        modal.style.display = "none";
-        if (history.length > 1) history.back();
-      };
-    </script>
   </body>
 </html>
+
+<script>
+  const modal = document.getElementById("modal");
+  const stockSpan = document.getElementById("stock");
+  const newStockInput = document.getElementById("new-stock");
+  const productId = "{{ product['product_id'] }}";
+
+  document.getElementById("update-btn").onclick = async () => {
+    const additionalStock = parseInt(newStockInput.value);
+    if (isNaN(additionalStock) || additionalStock <= 0) {
+      alert("Enter a valid stock number greater than 0");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/inventories/restock`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          product_id: productId,
+          additional_stock: additionalStock,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Unknown error");
+      }
+
+      const updatedProduct = await response.json();
+
+      stockSpan.innerText = updatedProduct.stock;
+
+      alert("Stock updated successfully");
+
+      newStockInput.value = "";
+    } catch (err) {
+      alert("Error updating stock: " + err.message);
+    }
+  };
+
+  document.getElementById("close-btn").onclick = () => {
+    modal.style.display = "none";
+    if (history.length > 1) history.back();
+  };
+</script>

@@ -41,11 +41,6 @@ body {
   gap: 20px;                      
 }
 
-
-.product-image {
-  flex: 0 0 250px;  
-}
-
 .product-info {
   flex: 1;          
   display: flex;

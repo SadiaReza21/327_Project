@@ -38,24 +38,28 @@ class Product:
         conn = None
         cursor = None
         try:
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            sql = """
-                INSERT INTO products 
-                (product_id, category_id, name, description, price, stock, 
-                image_url, date_added, is_available, is_archived)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """
-            values = (
-                product.product_id, product.category_id, product.name,
-                product.description, product.price, product.stock,
-                product.image_url, product.date_added, product.is_available,
-                product.is_archived
-            )
-            cursor.execute(sql, values)
-            conn.commit()
-            return True
-
+            if (product.product_id == None or product.name == "" or 
+                product.stock == None or product.price == None or 
+                product.category_id == None or product.image_url == ""):
+                raise ValueError("Required information is not filled!")
+            else:
+                conn = get_db_connection()
+                cursor = conn.cursor()
+                sql = """
+                    INSERT INTO products 
+                    (product_id, category_id, name, description, price, stock, 
+                    image_url, date_added, is_available, is_archived)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """
+                values = (
+                    product.product_id, product.category_id, product.name,
+                    product.description, product.price, product.stock,
+                    product.image_url, product.date_added, product.is_available,
+                    product.is_archived
+                )
+                cursor.execute(sql, values)
+                conn.commit()
+                return True
         except Error as e:
             print(f"Error creating product: {e}")
             return False
@@ -294,10 +298,11 @@ class Product:
             """    
             value = (product_id,)   
             cursor.execute(sql, value)
+            #Getting the product of that id to fetch it's name
+            prod = Product.get_product(product_id)
             # Make stock 0 for archived product table, later stock quantity 
-            # will be asked while restocking
-            sql = "INSERT INTO archived (product_id, stock) VALUES (%s, %s)"    
-            value = (product_id, 0)   
+            sql = "INSERT INTO archived (product_id, stock, name, is_archived) VALUES (%s, %s, %s, %s)"    
+            value = (product_id, 0, prod.name, True)   
             cursor.execute(sql, value)
             conn.commit()
             return True

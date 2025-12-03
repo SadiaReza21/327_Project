@@ -11,7 +11,7 @@ templates = Jinja2Templates(directory="frontend")
 
 
 # router for home page
-@router.get("/home")
+@router.get("/")
 def home(request: Request, db: Session = Depends(get_db)):
     """
     Render the home page with available products and categories.
@@ -31,15 +31,46 @@ def home(request: Request, db: Session = Depends(get_db)):
     )
 
 
+# router for logged-in buyer home page
+@router.get("/home/{buyer_id}")
+def home_buyer(request: Request, buyer_id: int, db: Session = Depends(get_db)):
+    """
+    Render the home page for a logged-in buyer, showing available products and categories.
+
+    Args:
+        request (Request): FastAPI request object for Jinja2 templates.
+        buyer_id (int): ID of the logged-in buyer.
+        db (Session, optional): SQLAlchemy database session (injected by Depends).
+
+    Returns:
+        HTMLResponse: Renders the home page with products, categories, and buyer info.
+    """
+    products = inventory_controller.get_products_in_inventory(db)
+    categories = category_controller.get_all_categories(db)
+
+    return templates.TemplateResponse(
+        "logged_in_home_page.html",
+        {
+            "request": request,
+            "products": products,
+            "categories": categories,
+            "buyer_id": buyer_id,
+        },
+    )
+
+
 # router for product details page
 @router.get("/product/{product_id}")
-def product_details(request: Request, product_id: int, db: Session = Depends(get_db)):
+def product_details(
+    request: Request, product_id: int, buyer_id: int, db: Session = Depends(get_db)
+):
     """
     Render the product details page for a specific product.
 
     Args:
         request (Request): FastAPI request object for Jinja2 templates.
         product_id (int): ID of the product to display.
+        buyer_id (int): ID of the logged-in buyer
         db (Session, optional): SQLAlchemy database session (injected by Depends).
 
     Returns:
@@ -63,6 +94,7 @@ def product_details(request: Request, product_id: int, db: Session = Depends(get
             "product": product,
             "category": category,
             "related_products": related_products,
+            "buyer_id": buyer_id,
         },
     )
 

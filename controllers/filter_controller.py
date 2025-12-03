@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
+from typing import Optional  # ADD THIS IMPORT
 from models.filter_model import (
     FilterRequestModel, 
     FilterResponseModel, 
@@ -6,11 +7,10 @@ from models.filter_model import (
 )
 from services.filter_service import (
     FilterService, 
-    InvalidFilterInputError, 
+    InvalidFilterInputError,  # Make sure this is imported
     DatabaseConnectionError
 )
 from services.product_service import ProductService
-from typing import Optional
 
 
 class FilterController:
@@ -56,17 +56,25 @@ class FilterController:
         ),
         min_price: Optional[float] = Query(
             None, 
-            ge=0, 
+            ge=0,  # FIXED: Changed g==0 to ge=0
             description="Minimum price filter"
         ),
         max_price: Optional[float] = Query(
             None, 
-            ge=0, 
+            ge=0,  # FIXED: Changed g==0 to ge=0
             description="Maximum price filter"
+        ),
+        search: Optional[str] = Query(
+            None,
+            description="Search by product name"
+        ),
+        sort: Optional[str] = Query(
+            None,
+            description="Sort by: price_low, price_high, name_asc, name_desc"
         )
     ) -> FilterResponseModel:
         """
-        Handle product filter requests
+        Handle product filter requests with enhanced filtering
         """
         try:
             filter_request = FilterRequestModel(
@@ -78,6 +86,27 @@ class FilterController:
             filter_results = self.filter_service.fun_filter_products(
                 filter_request
             )
+            
+            # Apply search filter if provided
+            if search:
+                filtered_results = [
+                    product for product in filter_results.products 
+                    if search.lower() in product.name.lower()
+                ]
+                filter_results.products = filtered_results
+                filter_results.total_count = len(filtered_results)
+            
+            # Apply sorting if requested
+            if sort:
+                if sort == "price_low":
+                    filter_results.products.sort(key=lambda x: x.price)
+                elif sort == "price_high":
+                    filter_results.products.sort(key=lambda x: x.price, reverse=True)
+                elif sort == "name_asc":
+                    filter_results.products.sort(key=lambda x: x.name)
+                elif sort == "name_desc":
+                    filter_results.products.sort(key=lambda x: x.name, reverse=True)
+            
             return filter_results
             
         except InvalidFilterInputError as invalid_input_error:

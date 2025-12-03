@@ -13,7 +13,9 @@ class BazarKoriApp:
         self.app = FastAPI(
             title="Bazar Kori E-Commerce API",
             description="Search and Filter Products - MVC Architecture",
-            version="1.0.0"
+            version="1.0.0",
+            docs_url="/api/docs",  # Added for Swagger UI
+            redoc_url="/api/redoc"  # Added for ReDoc
         )
         self.search_controller = SearchController()
         self.filter_controller = FilterController()
@@ -21,7 +23,7 @@ class BazarKoriApp:
         self.fun_setup_middleware()
         self.fun_setup_routes()
         self.fun_setup_static_files()
-        self.fun_setup_html_routes()          # serves both / and /filter
+        self.fun_setup_html_routes()
 
     def fun_setup_middleware(self):
         """Allow frontend to talk to backend"""

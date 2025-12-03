@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Products - Bazar Kori</title>
-
-    <!-- CORRECT STATIC PATHS – THIS FIXES EVERYTHING -->
-    <link rel="stylesheet" href="/static/filter.css">
-    <script src="/static/filter.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- TRY BOTH PATHS - One of these will work -->
+    <link rel="stylesheet" href="/static/filter.css">  <!-- Try this first -->
+    <!-- <link rel="stylesheet" href="/views/filter.css"> -->  <!-- If above fails, try this -->
+    
+    <script src="/static/filter.js" defer></script>  <!-- Try this first -->
+    <!-- <script src="/views/filter.js" defer></script> -->  <!-- If above fails, try this -->
 </head>
 <body>
     <!-- Header Section -->
     <header class="header">
         <div class="container">
             <div class="logo-section">
-                <h1 class="logo">Bazar Kori</h1>
+                <h1 class="logo"><i class="fas fa-shopping-basket"></i> Bazar Kori</h1>
+                <p class="tagline">Fresh Groceries Delivered</p>
             </div>
             <nav class="navigation">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/filter" class="nav-link">Browse & Filter</a>
-                <a href="#" class="nav-link">My Account</a>
-                <a href="#" class="nav-link basket-link">Basket(2)</a>
+                <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="/filter" class="nav-link active"><i class="fas fa-filter"></i> Browse & Filter</a>
+                <a href="#" class="nav-link"><i class="fas fa-user"></i> My Account</a>
+                <a href="#" class="nav-link basket-link">
+                    <i class="fas fa-shopping-cart"></i> 
+                    <span class="cart-count">0</span>
+                </a>
             </nav>
             <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open filters">
                 <span></span>
@@ -33,48 +41,112 @@
     <!-- Sidebar Filter -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h2>Filter Products</h2>
+            <h2><i class="fas fa-sliders-h"></i> Filter Products</h2>
             <button class="close-btn" id="closeBtn">×</button>
         </div>
         
         <div class="filter-section">
+            <!-- Search -->
+            <div class="filter-group">
+                <h3 class="filter-title"><i class="fas fa-search"></i> Search Products</h3>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Search by name..."
+                    >
+                </div>
+            </div>
+
             <!-- Category Filter -->
             <div class="filter-group">
-                <h3 class="filter-title">Category</h3>
-                <select class="filter-select" id="categoryFilter">
-                    <option value="">All Categories</option>
-                </select>
+                <h3 class="filter-title"><i class="fas fa-tags"></i> Categories</h3>
+                <div class="category-checkboxes" id="categoriesContainer">
+                    <!-- Categories will be loaded here -->
+                    <div class="skeleton-checkbox"></div>
+                    <div class="skeleton-checkbox"></div>
+                    <div class="skeleton-checkbox"></div>
+                </div>
             </div>
 
             <!-- Price Range Filter -->
             <div class="filter-group">
-                <h3 class="filter-title">Price Range</h3>
-                <div class="price-input-group">
-                    <input 
-                        type="number" 
-                        class="price-input" 
-                        id="minPrice" 
-                        placeholder="Min Price" 
-                        min="0"
-                    >
-                    <span class="price-separator">to</span>
-                    <input 
-                        type="number" 
-                        class="price-input" 
-                        id="maxPrice" 
-                        placeholder="Max Price" 
-                        min="0"
-                    >
+                <h3 class="filter-title"><i class="fas fa-tag"></i> Price Range</h3>
+                <div class="price-range">
+                    <div class="price-slider">
+                        <input 
+                            type="range" 
+                            class="range-slider" 
+                            id="priceSlider" 
+                            min="0" 
+                            max="100" 
+                            value="100"
+                        >
+                        <div class="slider-labels">
+                            <span>$0</span>
+                            <span>$50</span>
+                            <span>$100+</span>
+                        </div>
+                    </div>
+                    <div class="price-input-group">
+                        <div class="price-input-wrapper">
+                            <span class="price-label">Min</span>
+                            <input 
+                                type="number" 
+                                class="price-input" 
+                                id="minPrice" 
+                                placeholder="0" 
+                                min="0"
+                            >
+                        </div>
+                        <span class="price-separator">to</span>
+                        <div class="price-input-wrapper">
+                            <span class="price-label">Max</span>
+                            <input 
+                                type="number" 
+                                class="price-input" 
+                                id="maxPrice" 
+                                placeholder="100" 
+                                min="0"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sort Options -->
+            <div class="filter-group">
+                <h3 class="filter-title"><i class="fas fa-sort"></i> Sort By</h3>
+                <select class="filter-select" id="sortSelect">
+                    <option value="default">Recommended</option>
+                    <option value="price_low">Price: Low to High</option>
+                    <option value="price_high">Price: High to Low</option>
+                    <option value="name_asc">Name: A to Z</option>
+                    <option value="name_desc">Name: Z to A</option>
+                </select>
+            </div>
+
+            <!-- Stock Filter -->
+            <div class="filter-group">
+                <h3 class="filter-title"><i class="fas fa-box"></i> Availability</h3>
+                <div class="availability-filter">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="inStockOnly" checked>
+                        <span class="checkmark"></span>
+                        Show in-stock only
+                    </label>
                 </div>
             </div>
 
             <!-- Filter Actions -->
             <div class="filter-actions">
                 <button class="apply-btn" id="applyFilters">
-                    Apply Filters
+                    <i class="fas fa-check"></i> Apply Filters
                 </button>
                 <button class="reset-btn" id="resetFilters">
-                    Reset Filters
+                    <i class="fas fa-redo"></i> Reset All
                 </button>
             </div>
         </div>
@@ -88,49 +160,95 @@
         <div class="container">
             <!-- Page Header -->
             <div class="page-header">
-                <h2 class="page-title">Grocery Products</h2>
+                <div class="header-top">
+                    <h2 class="page-title">Fresh Grocery Products</h2>
+                    <button class="filter-toggle-btn" id="filterToggleBtn">
+                        <i class="fas fa-filter"></i> Filters
+                    </button>
+                </div>
                 <p class="page-subtitle">
-                    Filter products by category and price range
+                    Browse our fresh selection of groceries. Filter by category, price, and more.
                 </p>
-                <button class="filter-toggle-btn" id="filterToggleBtn">
-                    Show Filters
-                </button>
+                <div class="active-filters" id="activeFilters">
+                    <!-- Active filters will appear here -->
+                </div>
             </div>
 
             <!-- Results Section -->
             <div class="results-section">
                 <div class="results-header">
-                    <h3 id="resultsTitle">All Products</h3>
-                    <span class="results-count" id="resultsCount"></span>
+                    <div>
+                        <h3 id="resultsTitle">All Products</h3>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                            <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                        </div>
+                    </div>
+                    <div class="results-info">
+                        <span class="results-count" id="resultsCount">0 products</span>
+                        <span class="results-time" id="resultsTime"></span>
+                    </div>
                 </div>
 
                 <!-- Loading Spinner -->
-                <div class="loading-spinner hidden" id="loadingSpinner">
+                <div class="loading-spinner" id="loadingSpinner">
                     <div class="spinner"></div>
-                    <p>Loading products...</p>
+                    <p>Loading fresh products...</p>
                 </div>
 
                 <!-- Messages -->
                 <div class="no-results hidden" id="noResultsMessage">
-                    <h3>We are sorry. No matching product found.</h3>
-                    <p>Try adjusting your filters or browse all products</p>
+                    <i class="fas fa-search fa-3x"></i>
+                    <h3>No products match your filters</h3>
+                    <p>Try adjusting your search or browse all categories</p>
+                    <button class="clear-btn" id="clearAllFilters">Clear All Filters</button>
                 </div>
 
                 <div class="error-message hidden" id="errorMessage">
+                    <i class="fas fa-exclamation-triangle fa-3x"></i>
                     <h3>Unable to load products</h3>
-                    <p>Please check your connection and try again later</p>
+                    <p>Please check your connection and try again</p>
+                    <button class="retry-btn" id="retryBtn">Retry</button>
                 </div>
 
                 <!-- Products Grid -->
-                <div class="products-grid" id="productsGrid"></div>
+                <div class="products-grid grid-view" id="productsGrid">
+                    <!-- Products will be loaded here -->
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- Cart Notification -->
+    <div class="cart-notification hidden" id="cartNotification">
+        <i class="fas fa-check-circle"></i>
+        <span>Added to cart!</span>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Bazar Kori. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-shopping-basket"></i> Bazar Kori</h3>
+                    <p>Fresh groceries delivered to your doorstep</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="/">Home</a>
+                    <a href="/filter">Browse Products</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <a href="#">Vegetables</a>
+                    <a href="#">Fruits</a>
+                    <a href="#">Meat</a>
+                    <a href="#">Dairy</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 Bazar Kori. All rights reserved.</p>
         </div>
     </footer>
 </body>

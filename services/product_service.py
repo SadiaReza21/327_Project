@@ -1,3 +1,4 @@
+# services/product_service.py
 from models.product_model import ProductModel, SearchRequestModel, SearchResponseModel
 from typing import List, Optional
 import re
@@ -29,9 +30,9 @@ class ProductService:
         return [
             ProductModel(
                 name="Fresh Apples",
-                price=2.99,
+                price=3.00,
                 category="Fruits",
-                image_url="/static/images/apples.jpg",
+                image_url="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=400&h=300&fit=crop",
                 description="Fresh red apples, perfect for snacking",
                 stock_quantity=50
             ),
@@ -39,7 +40,7 @@ class ProductService:
                 name="Bananas",
                 price=1.49,
                 category="Fruits", 
-                image_url="/static/images/bananas.jpg",
+                image_url="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=300&fit=crop",
                 description="Sweet yellow bananas, rich in potassium",
                 stock_quantity=35
             ),
@@ -47,7 +48,7 @@ class ProductService:
                 name="Carrots",
                 price=1.99,
                 category="Vegetables",
-                image_url="/static/images/carrots.jpg",
+                image_url="https://images.unsplash.com/photo-1598170845058-78131a90f4bf?w=400&h=300&fit=crop",
                 description="Fresh organic carrots, great for cooking",
                 stock_quantity=40
             ),
@@ -55,7 +56,7 @@ class ProductService:
                 name="Milk",
                 price=3.49,
                 category="Dairy",
-                image_url="/static/images/milk.jpg",
+                image_url="https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=400&h=300&fit=crop",
                 description="Fresh whole milk, 1 gallon",
                 stock_quantity=25
             ),
@@ -63,7 +64,7 @@ class ProductService:
                 name="Bread",
                 price=2.99,
                 category="Bakery",
-                image_url="/static/images/bread.jpg",
+                image_url="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop",
                 description="Fresh whole wheat bread",
                 stock_quantity=30
             ),
@@ -71,7 +72,7 @@ class ProductService:
                 name="Eggs",
                 price=4.99,
                 category="Dairy",
-                image_url="/static/images/eggs.jpg",
+                image_url="https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=300&fit=crop",
                 description="Farm fresh eggs, dozen",
                 stock_quantity=20
             ),
@@ -79,7 +80,7 @@ class ProductService:
                 name="Chicken Breast",
                 price=8.99,
                 category="Meat",
-                image_url="/static/images/chicken.jpg",
+                image_url="https://images.unsplash.com/photo-1604503468505-6ff2c5a39d7c?w=400&h=300&fit=crop",
                 description="Boneless chicken breast, 1lb",
                 stock_quantity=15
             ),
@@ -87,9 +88,41 @@ class ProductService:
                 name="Rice",
                 price=5.99,
                 category="Grains",
-                image_url="/static/images/rice.jpg",
+                image_url="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop",
                 description="Long grain white rice, 2lb bag",
                 stock_quantity=18
+            ),
+            ProductModel(
+                name="Broccoli",
+                price=2.49,
+                category="Vegetables",
+                image_url="https://images.unsplash.com/photo-1459411621453-7b03977f4b4f?w=400&h=300&fit=crop",
+                description="Fresh green broccoli, perfect for salads",
+                stock_quantity=22
+            ),
+            ProductModel(
+                name="Orange Juice",
+                price=4.49,
+                category="Beverages",
+                image_url="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop",
+                description="100% pure orange juice, 1 liter",
+                stock_quantity=28
+            ),
+            ProductModel(
+                name="Potatoes",
+                price=2.99,
+                category="Vegetables",
+                image_url="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&h=300&fit=crop",
+                description="Fresh potatoes, 5lb bag",
+                stock_quantity=45
+            ),
+            ProductModel(
+                name="Yogurt",
+                price=3.29,
+                category="Dairy",
+                image_url="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop",
+                description="Greek yogurt, 32oz",
+                stock_quantity=32
             )
         ]
     

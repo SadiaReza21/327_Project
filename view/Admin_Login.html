@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Log In - Bazar Kori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Newsreader', serif;
+            background: #FAFAF5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 60px;
+            font-weight: 500;
+            color: #8D5B28;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 26px;
+            color: rgba(141, 17, 17, 0.72);
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+        .card {
+            background: white;
+            border: 2px solid #DBEFA8;
+            border-radius: 12px;
+            padding: 50px 60px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #8D5B28;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .success-message {
+            background: #efe;
+            color: #3c3;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .input-box {
+            background: #FCF9F9;
+            border: 1px solid rgba(152,141,141,0.42);
+            border-radius: 4px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            border: none;
+            background: none;
+            outline: none;
+            font-family: 'Newsreader', serif;
+            font-weight: 700;
+            font-size: 32px;
+            color: #575353;
+        }
+        input::placeholder { 
+            color: #575353; 
+            opacity: 0.7; 
+        }
+        .login-btn {
+            background: #AE1313;
+            color: #F8F8D4;
+            font-family: 'Newsreader', serif;
+            font-weight: 700;
+            font-size: 32px;
+            text-align: center;
+            padding: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0 10px;
+            transition: background 0.3s;
+        }
+        .login-btn:hover {
+            background: #8B0F0F;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">Bazar Kori</div>
+    <div class="subtitle">(Admin)</div>
+
+    <div class="card">
+        <h1 class="title">Log In</h1>
+
+        {% if success == False %}
+        <div class="error-message">{{ message }}</div>
+        {% endif %}
+
+        {% if success == True %}
+        <div class="success-message">{{ message }}</div>
+        {% endif %}
+
+        <form action="/admin-login" method="POST">
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Log In</button>
+        </form>
+    </div>
+
+</body>
+</html>

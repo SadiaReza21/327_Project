@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - Bazar Kori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Newsreader', serif;
+            background: #FAFAF5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        a {
+            color: #575353;
+        }
+        .logo {
+            font-size: 60px;
+            font-weight: 500;
+            color: #8D5B28;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+        .card {
+            background: white;
+            border: 2px solid #DBEFA8;
+            border-radius: 12px;
+            padding: 50px 60px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #8D5B28;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .error-message {
+            background: #fee;
+            color: #AE1313;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .success-message {
+            background: #efe;
+            color: rgb(25, 64, 25);
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .input-box {
+            background: #FCF9F9;
+            border: 1px solid rgba(152,141,141,0.42);
+            border-radius: 4px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            border: none;
+            background: none;
+            outline: none;
+            font-family: 'Newsreader', serif;
+            font-weight: 700;
+            font-size: 32px;
+            color: #575353;
+        }
+        input::placeholder { color: #575353; opacity: 0.7; }
+        .login-btn {
+            background: #AE1313;
+            color: #F8F8D4;
+            font-family: 'Newsreader', serif;
+            font-weight: 700;
+            font-size: 32px;
+            text-align: center;
+            padding: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0 30px;
+            transition: background 0.3s;
+        }
+        .login-btn:hover { background: #8B0F0F; }
+        .links {
+            text-align: center;
+            font-size: 27px;
+            font-weight: 700;
+        }
+        .forgot {
+            color: #426B1F;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .signup-link {
+            color: #575353;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="logo">Bazar Kori</div>
+
+    <div class="card">
+        <h1 class="title">Log In</h1>
+        {% if success == False %}
+        <div class="error-message">{{ message }}</div>
+        {% endif %}
+
+        {% if success == True %}
+        <div class="success-message">{{ message }}</div>
+        {% endif %}
+
+
+
+        <form action="/buyer-login" method="POST">
+            <div class="input-box">
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Log In</button>
+        </form>
+
+        <div class="links">
+            <span class="forgot">Forgot password?</span>
+            <a>Do not have any account? </a>
+            <span class="signup-link">
+                <a href="/buyer-signup">Sign Up</a>
+            </span>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/static/cart.css" />
+  </head>
+  <body>
+    <h1>Cart for Buyer ID: {{ buyer_id }}</h1>
+
+    {% if cart_items %}
+    <div class="cart-container">
+      {% for item in cart_items %}
+      <div class="cart-card" data-cart-id="{{ item.cart_id }}">
+        <div class="product-name">{{ item.product_name }}</div>
+        <div class="product-price">৳{{ item.price }}</div>
+
+        <div class="quantity-container">
+          <label>Quantity:</label>
+          <input type="number" value="{{ item.quantity }}" readonly />
+        </div>
+
+        <div class="item-total">Total: ৳<span>{{ item.total }}</span></div>
+
+        <button class="remove-btn" onclick="removeItem('{{ item.cart_id }}')">
+          Remove
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="total-container">
+      <div>Grand Total: </div>
+      <span id="grand-total">{{ total }} Taka</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    {% else %}
+    <div class="empty-cart">Your cart is empty.</div>
+    {% endif %}
+  </body>
+</html>
+
+<script>
+  const buyerId = "{{ buyer_id }}";
+
+  async function removeItem(cartId) {
+    const res = await fetch(`/carts/remove/${cartId}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      document.querySelector(`.cart-card[data-cart-id='${cartId}']`).remove();
+      calculateTotal();
+    } else {
+      console.error("Failed to remove cart item");
+    }
+  }
+
+  function calculateTotal() {
+    let total = 0;
+    document.querySelectorAll(".cart-card").forEach((card) => {
+      total += parseFloat(card.querySelector(".item-total span").innerText);
+    });
+    document.getElementById("grand-total").innerText = total.toFixed(2);
+  }
+
+  function checkout() {
+    window.location.href = `/order/${buyerId}`;
+  }
+</script>

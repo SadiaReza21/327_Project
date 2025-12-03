@@ -1,0 +1,113 @@
+/* Body */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Page Header */
+h1 {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+/* Container */
+.checkout-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 30px;
+}
+
+/* Product list */
+.product-list {
+    margin-bottom: 30px;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.product-name {
+    font-weight: 600;
+}
+
+.product-price {
+    color: #4CAF50;
+}
+
+/* Total */
+.total {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Delivery address */
+.address-container {
+    margin-top: 20px;
+}
+
+.address-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.address-container textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+/* Payment method */
+.payment-method {
+    margin-top: 20px;
+}
+
+.payment-method label {
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+/* Confirm button */
+.confirm-btn {
+    margin-top: 30px;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.confirm-btn:hover {
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .product-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-price {
+        margin-top: 5px;
+    }
+}

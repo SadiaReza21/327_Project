@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/static/checkout.css" />
+  </head>
+  <body>
+    <h1>Checkout</h1>
+
+    <div class="checkout-container">
+      <!-- Product List -->
+      <div class="product-list">
+        {% for item in cart_items %}
+        <div class="product-item">
+          <div class="product-name">
+            {{ item.product_name }} x {{ item.quantity }}
+          </div>
+          <div class="product-price">৳{{ item.total }}</div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Grand Total -->
+      <div class="total">
+        Grand Total: ৳<span id="grand-total">{{ total }}</span>
+      </div>
+
+      <!-- Delivery Address -->
+      <div class="address-container">
+        <label for="address">Delivery Address:</label>
+        <textarea
+          id="address"
+          rows="4"
+          placeholder="Enter your delivery address"
+        ></textarea>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="payment-method">
+        <label>Payment Method:</label>
+        <input type="radio" id="cash" name="payment" value="cash" checked />
+        <label for="cash">Cash</label>
+      </div>
+
+      <!-- Confirm Button -->
+      <button class="confirm-btn" onclick="confirmOrder()">
+        Confirm Order
+      </button>
+    </div>
+  </body>
+</html>
+
+<script>
+  const buyerId = "{{ buyer_id }}";
+
+  function confirmOrder() {
+    const address = document.getElementById("address").value.trim();
+    const paymentMethod = document.querySelector(
+      'input[name="payment"]:checked'
+    ).value;
+
+    if (address === "") {
+      alert("Please enter a delivery address.");
+      return;
+    }
+
+    const orderData = {
+      buyer_id: parseInt(buyerId),
+      delivery_address: address,
+    };
+
+    fetch("/order/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          alert(data.message); 
+          window.location.href = `http://127.0.0.1:8001/home/${buyerId}`;
+        } else {
+          alert("Something went wrong.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Error connecting to server.");
+      });
+  }
+</script>

@@ -40,7 +40,7 @@ This is an online grocery shopping platform that is made to make the home essent
   ```
 - Go to http://localhost:8000/ and website is ready to use
 
-### Run the project with multi branh:
+### Run the project with multi branch:
 
 The project supports **multi-branch deployment**, where each branch runs on a specific port. This allows testing multiple features or versions simultaneously without conflicts.
 

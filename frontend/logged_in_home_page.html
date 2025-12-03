@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bazaar Kori - Modern Shopping</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/logged_in_home_page.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="container header-top">
+        <div class="logo"><i class="fas fa-shopping-bag"></i> Bazaar Kori</div>
+
+        <div class="user-actions">
+          <a
+            href="http://127.0.0.1:8004/cart_page/{{ buyer_id }}"
+            id="cart-link"
+          >
+            <i class="fas fa-shopping-cart"></i> Cart
+            <span class="cart-count" id="cart-count">0</span>
+          </a>
+          <a href="http://127.0.0.1:8002/buyer-profile/{{ buyer_id }}"
+            ><i class="fas fa-user"></i> Profile</a
+          >
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <div class="search-container">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Search for your desired products..."
+          />
+          <button>Search</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-wrapper container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <h3>Categories</h3>
+        <ul class="category-list" id="category-list">
+          {% for cat in categories %}
+          <li>{{ cat.category_name }}</li>
+          {% endfor %}
+        </ul>
+      </aside>
+
+      <!-- PRODUCT GRID -->
+      <div class="products-grid" id="products-grid">
+        {% for p in products %}
+        <div class="product-card" data-product-id="{{ p.product_id }}">
+          <div class="product-image">
+            <img src="/{{ p.image_url }}" alt="{{ p.name }}" />
+          </div>
+
+          <div class="product-info">
+            <h3>{{ p.name }}</h3>
+            <p>{{ p.description }}</p>
+            <div class="product-price">৳{{ p.price }}</div>
+            <div class="product-stock">Stock: {{ p.stock }}</div>
+
+            <div class="product-actions">
+              <button class="add-to-cart">Add to Cart</button>
+              <a href="/product/{{ p.product_id }}/?buyer_id={{ buyer_id }}">
+                <button class="view-details">View Details</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+  </body>
+</html>
+
+<script>
+  const addToCartButtons = document.querySelectorAll(".add-to-cart");
+  const cartCountEl = document.getElementById("cart-count");
+
+  let cartCount = 0;
+
+  addToCartButtons.forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const productCard = e.target.closest(".product-card");
+      const productId = productCard.dataset.productId;
+      const buyerId = Number("{{ buyer_id }}");
+
+      try {
+        const response = await fetch("http://127.0.0.1:8004/carts/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            buyer_id: buyerId,
+            product_id: productId,
+            quantity: 1,
+          }),
+        });
+
+        if (response.ok) {
+          cartCount += 1;
+          cartCountEl.textContent = cartCount;
+        } else {
+          const data = await response.json();
+          alert("Failed to add: " + data.detail || "Unknown error");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Error adding to cart.");
+      }
+    });
+  });
+</script>

@@ -1,0 +1,13 @@
+Need to import the MySQL database - "bazarkori_db.sql" with the same name in local directory. That will create the database needed for this two features.
+
+Need to install fastapi, uvicorn, mysql.connector sphinx, jinja2, pytest and pytest-mock
+
+For running the project - Open terminal, go to the project's root directory and run the command - python main.py
+
+For displaying the documentation - Open terminal, go the Project/docs directory and run the command - ./make.bat html
+Now open the docs/build/html/index.html
+
+For running the test functions - Open terminal, go to the project's root directory and run the command - pytest -v
+The test reports will be shown in the terminal
+
+ 

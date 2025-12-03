@@ -102,7 +102,7 @@
                 <div class="actions">
 
                     <!-- Restock Button -->
-                    <form method="post" action="http://127.0.0.1:8001/restock-product/{{ product.product_id }}" 
+                    <form method="get" action="http://127.0.0.1:8001/restock-product/{{ product.product_id }}" 
                         onsubmit="return confirm('Unarchive this product? It becomes visible to buyers.')">
                         <input type="hidden" name="p_id" value="{{ product.product_id }}">
                         <!-- <button type="submit" class="archive">Unarchive</button> -->

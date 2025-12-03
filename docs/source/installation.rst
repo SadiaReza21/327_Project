@@ -40,7 +40,7 @@ Open MySQL and run these commands:
    );
 
    INSERT INTO admins (email, password) 
-   VALUES ('admin@bazarkori.com', 'admin123');
+   VALUES ('admin@bazar.com', 'admin123');
 
 Step 3: Configure Database Connection
 --------------------------------------

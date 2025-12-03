@@ -19,12 +19,9 @@
         <div class="logo"><i class="fas fa-shopping-bag"></i> Bazaar Kori</div>
 
         <div class="user-actions">
-          <a href="#"><i class="fas fa-user"></i> Sign Up / Account</a>
-
-          <a href="#" class="cart">
-            <i class="fas fa-shopping-basket"></i> Basket
-            <span class="cart-count">0</span>
-          </a>
+          <a href="http://127.0.0.1:8002/buyer-login"
+            ><i class="fas fa-user"></i> Sign Up / Log In</a
+          >
         </div>
       </div>
 
@@ -56,10 +53,7 @@
         {% for p in products %}
         <div class="product-card">
           <div class="product-image">
-             <img
-              src="/static/{{ p.image_url }}"
-              alt="{{ p.name }}"
-            />
+            <img src="{{ p.image_url }}" alt="{{ p.name }}" />
           </div>
 
           <div class="product-info">
@@ -69,8 +63,10 @@
             <div class="product-stock">Stock: {{ p.stock }}</div>
 
             <div class="product-actions">
-              <button class="add-to-cart">Add to Cart</button>
-              <a href="/product/{{ p.product_id }}">
+              <a href="http://127.0.0.1:8002/buyer-login">
+                <button class="add-to-cart">Add to Cart</button>
+              </a>
+              <a href="http://127.0.0.1:8002/buyer-login">
                 <button class="view-details">View Details</button>
               </a>
             </div>
@@ -78,12 +74,6 @@
         </div>
         {% endfor %}
       </div>
-    </div>
-
-    <!-- FLOATING CART BUTTON -->
-    <div class="floating-cart">
-      <i class="fas fa-shopping-cart"></i>
-      <span class="fc-count">0</span>
     </div>
 
     <!-- FOOTER -->

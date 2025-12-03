@@ -47,7 +47,7 @@ def admin_login(request: Request, email: str = Form(...), password: str = Form(.
     result = admin_login_controller.login(email, password)
     
     if result["success"]:
-        return RedirectResponse(url="/admin-dashboard", status_code=303)
+        return RedirectResponse(url="http://127.0.0.1:8003/", status_code=303)
 
     return templates.TemplateResponse(
         "Admin_Login.html",
@@ -133,7 +133,7 @@ def buyer_login(request: Request, email: str = Form(...), password: str = Form(.
     
     if result.get("success") and result.get("id"):
         buyer_id = result["id"]
-        return RedirectResponse(url=f"/buyer-profile/{buyer_id}", status_code=303)
+        return RedirectResponse(url=f"http://127.0.0.1:8001/home/{buyer_id}", status_code=303)
  
     return templates.TemplateResponse(
         "Buyer_Login.html",

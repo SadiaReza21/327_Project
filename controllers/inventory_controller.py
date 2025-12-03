@@ -26,7 +26,7 @@ def sync_inventory(db: Session):
     for p in products:
         inv = db.query(Inventory).filter(Inventory.product_id == p.product_id).first()
 
-        if p.is_available:
+        if p.is_available and p.stock > 0:
             if not inv:
                 new_inv = Inventory(
                     product_id=p.product_id,
@@ -91,7 +91,7 @@ def restock_product(db: Session, product_id: int, additional_stock: int):
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
 
-    if additional_stock < 0:
+    if additional_stock <= 0:
         raise HTTPException(status_code=400, detail="Stock to add must be positive")
 
     product.stock += additional_stock

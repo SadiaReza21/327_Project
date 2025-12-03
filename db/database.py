@@ -5,11 +5,11 @@ from sqlalchemy.orm import sessionmaker
 
 DB_USER = "root"
 DB_PASSWORD = ""
-DB_HOST = "localhost"          # or your MySQL server host
-DB_PORT = "3306"               # default MySQL port
-DB_NAME = "bazarkori_db"
+DB_HOST = "localhost"          
+DB_PORT = "3306"               
+DB_NAME = "bazar_kori"
 
-DATABASE_URL = f"mysql+mysqlconnector://root:@localhost:3306/bazarkori_db"
+DATABASE_URL = f"mysql+mysqlconnector://root:@localhost:3306/bazar_kori"
 
 engine = create_engine(
     DATABASE_URL,

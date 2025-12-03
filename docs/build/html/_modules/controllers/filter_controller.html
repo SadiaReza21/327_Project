@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>controllers.filter_controller &mdash; Bazar Kori 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Bazar Kori
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Bazar Kori</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../controllers.html">controllers package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../controllers.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../controllers.html#module-controllers.filter_controller">controllers.filter_controller module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../controllers.html#controllers.filter_controller.FilterController"><code class="docutils literal notranslate"><span class="pre">FilterController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../controllers.html#module-controllers.search_controller">controllers.search_controller module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../controllers.html#controllers.search_controller.SearchController"><code class="docutils literal notranslate"><span class="pre">SearchController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../controllers.html#module-controllers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../main.html">main module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../main.html#main.BazarKoriApp"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../main.html#main.BazarKoriApp.__init__"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../main.html#main.BazarKoriApp.fun_get_app"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_get_app()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../main.html#main.BazarKoriApp.fun_setup_html_routes"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_html_routes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../main.html#main.BazarKoriApp.fun_setup_middleware"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_middleware()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../main.html#main.BazarKoriApp.fun_setup_routes"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_routes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../main.html#main.BazarKoriApp.fun_setup_static_files"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_static_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../main.html#main.fun_create_app"><code class="docutils literal notranslate"><span class="pre">fun_create_app()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/main.html">main</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/main.html#main.BazarKoriApp"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/main.html#main.BazarKoriApp.__init__"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/main.html#main.BazarKoriApp.fun_get_app"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_get_app()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/main.html#main.BazarKoriApp.fun_setup_html_routes"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_html_routes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/main.html#main.BazarKoriApp.fun_setup_middleware"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_middleware()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/main.html#main.BazarKoriApp.fun_setup_routes"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_routes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/main.html#main.BazarKoriApp.fun_setup_static_files"><code class="docutils literal notranslate"><span class="pre">BazarKoriApp.fun_setup_static_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/main.html#main.fun_create_app"><code class="docutils literal notranslate"><span class="pre">fun_create_app()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/models.product.html">models.product</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product"><code class="docutils literal notranslate"><span class="pre">Product</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.__init__"><code class="docutils literal notranslate"><span class="pre">Product.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.category"><code class="docutils literal notranslate"><span class="pre">Product.category</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.construct"><code class="docutils literal notranslate"><span class="pre">Product.construct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.copy"><code class="docutils literal notranslate"><span class="pre">Product.copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.description"><code class="docutils literal notranslate"><span class="pre">Product.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.dict"><code class="docutils literal notranslate"><span class="pre">Product.dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.from_orm"><code class="docutils literal notranslate"><span class="pre">Product.from_orm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.id"><code class="docutils literal notranslate"><span class="pre">Product.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.image_url"><code class="docutils literal notranslate"><span class="pre">Product.image_url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.in_stock"><code class="docutils literal notranslate"><span class="pre">Product.in_stock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.json"><code class="docutils literal notranslate"><span class="pre">Product.json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">Product.model_computed_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_config"><code class="docutils literal notranslate"><span class="pre">Product.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_construct"><code class="docutils literal notranslate"><span class="pre">Product.model_construct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_copy"><code class="docutils literal notranslate"><span class="pre">Product.model_copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_dump"><code class="docutils literal notranslate"><span class="pre">Product.model_dump()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_dump_json"><code class="docutils literal notranslate"><span class="pre">Product.model_dump_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_extra"><code class="docutils literal notranslate"><span class="pre">Product.model_extra</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_fields"><code class="docutils literal notranslate"><span class="pre">Product.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_fields_set"><code class="docutils literal notranslate"><span class="pre">Product.model_fields_set</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_json_schema"><code class="docutils literal notranslate"><span class="pre">Product.model_json_schema()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_parametrized_name"><code class="docutils literal notranslate"><span class="pre">Product.model_parametrized_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_post_init"><code class="docutils literal notranslate"><span class="pre">Product.model_post_init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_rebuild"><code class="docutils literal notranslate"><span class="pre">Product.model_rebuild()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_validate"><code class="docutils literal notranslate"><span class="pre">Product.model_validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_validate_json"><code class="docutils literal notranslate"><span class="pre">Product.model_validate_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.model_validate_strings"><code class="docutils literal notranslate"><span class="pre">Product.model_validate_strings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.name"><code class="docutils literal notranslate"><span class="pre">Product.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.parse_file"><code class="docutils literal notranslate"><span class="pre">Product.parse_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.parse_obj"><code class="docutils literal notranslate"><span class="pre">Product.parse_obj()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.parse_raw"><code class="docutils literal notranslate"><span class="pre">Product.parse_raw()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.price"><code class="docutils literal notranslate"><span class="pre">Product.price</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.rating"><code class="docutils literal notranslate"><span class="pre">Product.rating</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.schema"><code class="docutils literal notranslate"><span class="pre">Product.schema()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.schema_json"><code class="docutils literal notranslate"><span class="pre">Product.schema_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.stock_quantity"><code class="docutils literal notranslate"><span class="pre">Product.stock_quantity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.update_forward_refs"><code class="docutils literal notranslate"><span class="pre">Product.update_forward_refs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/models.product.html#models.product.Product.validate"><code class="docutils literal notranslate"><span class="pre">Product.validate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/controllers.html">controllers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/controllers.filter_controller.html">controllers.filter_controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/controllers.filter_controller.html#controllers.filter_controller.FilterController"><code class="docutils literal notranslate"><span class="pre">FilterController</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.filter_controller.html#controllers.filter_controller.FilterController.__init__"><code class="docutils literal notranslate"><span class="pre">FilterController.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.filter_controller.html#controllers.filter_controller.FilterController.fun_get_categories"><code class="docutils literal notranslate"><span class="pre">FilterController.fun_get_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.filter_controller.html#controllers.filter_controller.FilterController.fun_handle_filter"><code class="docutils literal notranslate"><span class="pre">FilterController.fun_handle_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.filter_controller.html#controllers.filter_controller.FilterController.fun_setup_routes"><code class="docutils literal notranslate"><span class="pre">FilterController.fun_setup_routes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/controllers.search_controller.html">controllers.search_controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/controllers.search_controller.html#controllers.search_controller.SearchController"><code class="docutils literal notranslate"><span class="pre">SearchController</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.search_controller.html#controllers.search_controller.SearchController.__init__"><code class="docutils literal notranslate"><span class="pre">SearchController.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.search_controller.html#controllers.search_controller.SearchController.fun_get_all_products"><code class="docutils literal notranslate"><span class="pre">SearchController.fun_get_all_products()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.search_controller.html#controllers.search_controller.SearchController.fun_get_categories"><code class="docutils literal notranslate"><span class="pre">SearchController.fun_get_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.search_controller.html#controllers.search_controller.SearchController.fun_handle_search"><code class="docutils literal notranslate"><span class="pre">SearchController.fun_handle_search()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/controllers.search_controller.html#controllers.search_controller.SearchController.fun_setup_routes"><code class="docutils literal notranslate"><span class="pre">SearchController.fun_setup_routes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bazar Kori</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">controllers.filter_controller</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for controllers.filter_controller</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Query</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span> <span class="c1"># ADD THIS IMPORT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">models.filter_model</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FilterRequestModel</span><span class="p">,</span>
+    <span class="n">FilterResponseModel</span><span class="p">,</span>
+    <span class="n">FilterErrorResponseModel</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">services.filter_service</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FilterService</span><span class="p">,</span>
+    <span class="n">InvalidFilterInputError</span><span class="p">,</span> <span class="c1"># Make sure this is imported</span>
+    <span class="n">DatabaseConnectionError</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">services.product_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProductService</span>
+
+<div class="viewcode-block" id="FilterController">
+<a class="viewcode-back" href="../../controllers.html#controllers.filter_controller.FilterController">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FilterController</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Controller for product filtering operations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+   
+<div class="viewcode-block" id="FilterController.__init__">
+<a class="viewcode-back" href="../../controllers.html#controllers.filter_controller.FilterController.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the FilterController with router and services.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">()</span>
+        <span class="n">product_service</span> <span class="o">=</span> <span class="n">ProductService</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_service</span> <span class="o">=</span> <span class="n">FilterService</span><span class="p">(</span><span class="n">product_service</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fun_setup_routes</span><span class="p">()</span></div>
+
+   
+   
+<div class="viewcode-block" id="FilterController.fun_setup_routes">
+<a class="viewcode-back" href="../../controllers.html#controllers.filter_controller.FilterController.fun_setup_routes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fun_setup_routes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setup API routes for filter functionality</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">add_api_route</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/api/v1/filter&quot;</span><span class="p">,</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fun_handle_filter</span><span class="p">,</span>
+            <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">],</span>
+            <span class="n">response_model</span><span class="o">=</span><span class="n">FilterResponseModel</span><span class="p">,</span>
+            <span class="n">responses</span><span class="o">=</span><span class="p">{</span>
+                <span class="mi">400</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">FilterErrorResponseModel</span><span class="p">},</span>
+                <span class="mi">500</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">FilterErrorResponseModel</span><span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+       
+        <span class="bp">self</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">add_api_route</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/api/v1/filter/categories&quot;</span><span class="p">,</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fun_get_categories</span><span class="p">,</span>
+            <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">],</span>
+            <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span>
+        <span class="p">)</span></div>
+
+   
+   
+<div class="viewcode-block" id="FilterController.fun_handle_filter">
+<a class="viewcode-back" href="../../controllers.html#controllers.filter_controller.FilterController.fun_handle_filter">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fun_handle_filter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">category</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Filter by specific category&quot;</span>
+        <span class="p">),</span>
+        <span class="n">min_price</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># FIXED: Changed g==0 to ge=0</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Minimum price filter&quot;</span>
+        <span class="p">),</span>
+        <span class="n">max_price</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># FIXED: Changed g==0 to ge=0</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Maximum price filter&quot;</span>
+        <span class="p">),</span>
+        <span class="n">search</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Search by product name&quot;</span>
+        <span class="p">),</span>
+        <span class="n">sort</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Sort by: price_low, price_high, name_asc, name_desc&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterResponseModel</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle product filter requests with enhanced filtering</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Create filter request model from query parameters</span>
+            <span class="n">filter_request</span> <span class="o">=</span> <span class="n">FilterRequestModel</span><span class="p">(</span>
+                <span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">,</span>
+                <span class="n">min_price</span><span class="o">=</span><span class="n">min_price</span><span class="p">,</span>
+                <span class="n">max_price</span><span class="o">=</span><span class="n">max_price</span>
+            <span class="p">)</span>
+           
+            <span class="c1"># Apply filters using the filter service</span>
+            <span class="n">filter_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_service</span><span class="o">.</span><span class="n">fun_filter_products</span><span class="p">(</span>
+                <span class="n">filter_request</span>
+            <span class="p">)</span>
+           
+            <span class="c1"># Apply search filter if provided</span>
+            <span class="k">if</span> <span class="n">search</span><span class="p">:</span>
+                <span class="n">filtered_results</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">product</span> <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">filter_results</span><span class="o">.</span><span class="n">products</span>
+                    <span class="k">if</span> <span class="n">search</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="p">]</span>
+                <span class="n">filter_results</span><span class="o">.</span><span class="n">products</span> <span class="o">=</span> <span class="n">filtered_results</span>
+                <span class="n">filter_results</span><span class="o">.</span><span class="n">total_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_results</span><span class="p">)</span>
+           
+            <span class="c1"># Apply sorting if requested</span>
+            <span class="k">if</span> <span class="n">sort</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sort</span> <span class="o">==</span> <span class="s2">&quot;price_low&quot;</span><span class="p">:</span>
+                    <span class="n">filter_results</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">price</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">sort</span> <span class="o">==</span> <span class="s2">&quot;price_high&quot;</span><span class="p">:</span>
+                    <span class="n">filter_results</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">price</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">sort</span> <span class="o">==</span> <span class="s2">&quot;name_asc&quot;</span><span class="p">:</span>
+                    <span class="n">filter_results</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">sort</span> <span class="o">==</span> <span class="s2">&quot;name_desc&quot;</span><span class="p">:</span>
+                    <span class="n">filter_results</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+           
+            <span class="k">return</span> <span class="n">filter_results</span>
+           
+        <span class="k">except</span> <span class="n">InvalidFilterInputError</span> <span class="k">as</span> <span class="n">invalid_input_error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                <span class="n">detail</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid filter input&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">invalid_input_error</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">DatabaseConnectionError</span> <span class="k">as</span> <span class="n">db_connection_error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                <span class="n">detail</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Database unavailable&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;Unable to load filter results. Please try again later.&quot;</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">unexpected_error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                <span class="n">detail</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Filter failed&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;Please try again later.&quot;</span>
+                <span class="p">}</span>
+            <span class="p">)</span></div>
+
+   
+   
+<div class="viewcode-block" id="FilterController.fun_get_categories">
+<a class="viewcode-back" href="../../controllers.html#controllers.filter_controller.FilterController.fun_get_categories">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fun_get_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all available categories for filtering</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Retrieve categories from the filter service</span>
+            <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_service</span><span class="o">.</span><span class="n">fun_get_categories</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">categories</span>
+        <span class="k">except</span> <span class="n">DatabaseConnectionError</span> <span class="k">as</span> <span class="n">db_error</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                <span class="n">detail</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Failed to fetch categories&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">db_error</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Yasmin Sultana Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

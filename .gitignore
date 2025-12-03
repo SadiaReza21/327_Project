@@ -1,1 +1,9 @@
-docs/
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# FastAPI / frontend
+ProductImages/
+docs1/     

@@ -1,0 +1,21 @@
+db package
+==========
+
+Submodules
+----------
+
+db.database module
+------------------
+
+.. automodule:: db.database
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: db
+   :members:
+   :show-inheritance:
+   :undoc-members:

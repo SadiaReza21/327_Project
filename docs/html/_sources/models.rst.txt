@@ -1,0 +1,45 @@
+models package
+==============
+
+Submodules
+----------
+
+models.archived module
+----------------------
+
+.. automodule:: models.archived
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+models.category module
+----------------------
+
+.. automodule:: models.category
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+models.inventory module
+-----------------------
+
+.. automodule:: models.inventory
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+models.product module
+---------------------
+
+.. automodule:: models.product
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: models
+   :members:
+   :show-inheritance:
+   :undoc-members:

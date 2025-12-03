@@ -1,0 +1,37 @@
+CSE327TALHA.views package
+=========================
+
+Submodules
+----------
+
+CSE327TALHA.views.category\_routers module
+------------------------------------------
+
+.. automodule:: CSE327TALHA.views.category_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.views.inventory\_routers module
+-------------------------------------------
+
+.. automodule:: CSE327TALHA.views.inventory_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.views.product\_routers module
+-----------------------------------------
+
+.. automodule:: CSE327TALHA.views.product_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: CSE327TALHA.views
+   :members:
+   :show-inheritance:
+   :undoc-members:

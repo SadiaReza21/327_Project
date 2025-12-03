@@ -1,0 +1,21 @@
+CSE327TALHA.frontend package
+============================
+
+Submodules
+----------
+
+CSE327TALHA.frontend.frontend\_routers module
+---------------------------------------------
+
+.. automodule:: CSE327TALHA.frontend.frontend_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: CSE327TALHA.frontend
+   :members:
+   :show-inheritance:
+   :undoc-members:

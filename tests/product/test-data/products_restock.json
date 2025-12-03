@@ -1,0 +1,22 @@
+[
+  {"product_id":1,"name":"Milk","initial_stock":5,"additional_stock":10,"price":2.5,"category_id":1,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":15},
+  {"product_id":2,"name":"Bread","initial_stock":0,"additional_stock":20,"price":1.2,"category_id":1,"is_available":false,"is_archived":true,"expected_success":true,"expected_stock":20},
+  {"product_id":3,"name":"Eggs","initial_stock":12,"additional_stock":-5,"price":0.2,"category_id":2,"is_available":true,"is_archived":false,"expected_success":false,"expected_stock":12},
+  {"product_id":4,"name":"Rice","initial_stock":50,"additional_stock":50,"price":0.8,"category_id":2,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":100},
+  {"product_id":5,"name":"Butter","initial_stock":0,"additional_stock":0,"price":3.0,"category_id":3,"is_available":false,"is_archived":true,"expected_success":false,"expected_stock":0},
+  {"product_id":6,"name":"Cheese","initial_stock":7,"additional_stock":3,"price":4.0,"category_id":3,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":10},
+  {"product_id":7,"name":"Apples","initial_stock":0,"additional_stock":15,"price":0.5,"category_id":4,"is_available":false,"is_archived":true,"expected_success":true,"expected_stock":15},
+  {"product_id":8,"name":"Bananas","initial_stock":20,"additional_stock":-1,"price":0.3,"category_id":4,"is_available":true,"is_archived":false,"expected_success":false,"expected_stock":20},
+  {"product_id":9,"name":"Tomatoes","initial_stock":10,"additional_stock":5,"price":0.4,"category_id":4,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":15},
+  {"product_id":10,"name":"Onions","initial_stock":0,"additional_stock":10,"price":0.2,"category_id":4,"is_available":false,"is_archived":true,"expected_success":true,"expected_stock":10},
+  {"product_id":11,"name":"Chicken","initial_stock":8,"additional_stock":12,"price":5.0,"category_id":5,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":20},
+  {"product_id":12,"name":"Fish","initial_stock":0,"additional_stock":-2,"price":6.0,"category_id":5,"is_available":false,"is_archived":true,"expected_success":false,"expected_stock":0},
+  {"product_id":13,"name":"Cereal","initial_stock":15,"additional_stock":5,"price":3.5,"category_id":6,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":20},
+  {"product_id":14,"name":"Juice","initial_stock":0,"additional_stock":8,"price":2.0,"category_id":6,"is_available":false,"is_archived":true,"expected_success":true,"expected_stock":8},
+  {"product_id":15,"name":"Coffee","initial_stock":12,"additional_stock":0,"price":7.0,"category_id":7,"is_available":true,"is_archived":false,"expected_success":false,"expected_stock":12},
+  {"product_id":16,"name":"Tea","initial_stock":0,"additional_stock":-1,"price":4.0,"category_id":7,"is_available":false,"is_archived":true,"expected_success":false,"expected_stock":0},
+  {"product_id":17,"name":"Sugar","initial_stock":25,"additional_stock":5,"price":1.0,"category_id":2,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":30},
+  {"product_id":18,"name":"Salt","initial_stock":0,"additional_stock":0,"price":0.5,"category_id":2,"is_available":false,"is_archived":true,"expected_success":false,"expected_stock":0},
+  {"product_id":19,"name":"Yogurt","initial_stock":6,"additional_stock":4,"price":1.5,"category_id":3,"is_available":true,"is_archived":false,"expected_success":true,"expected_stock":10},
+  {"product_id":20,"name":"Ice Cream","initial_stock":0,"additional_stock":10,"price":3.0,"category_id":3,"is_available":false,"is_archived":true,"expected_success":true,"expected_stock":10}
+]

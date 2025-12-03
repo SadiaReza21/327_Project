@@ -1,0 +1,45 @@
+controllers package
+===================
+
+Submodules
+----------
+
+controllers.archived\_controller module
+---------------------------------------
+
+.. automodule:: controllers.archived_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+controllers.category\_controller module
+---------------------------------------
+
+.. automodule:: controllers.category_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+controllers.inventory\_controller module
+----------------------------------------
+
+.. automodule:: controllers.inventory_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+controllers.product\_controller module
+--------------------------------------
+
+.. automodule:: controllers.product_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: controllers
+   :members:
+   :show-inheritance:
+   :undoc-members:

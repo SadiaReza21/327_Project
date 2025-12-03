@@ -1,0 +1,21 @@
+CSE327TALHA.db package
+======================
+
+Submodules
+----------
+
+CSE327TALHA.db.database module
+------------------------------
+
+.. automodule:: CSE327TALHA.db.database
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: CSE327TALHA.db
+   :members:
+   :show-inheritance:
+   :undoc-members:

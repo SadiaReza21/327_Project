@@ -1,0 +1,37 @@
+views package
+=============
+
+Submodules
+----------
+
+views.category\_routers module
+------------------------------
+
+.. automodule:: views.category_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+views.inventory\_routers module
+-------------------------------
+
+.. automodule:: views.inventory_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+views.product\_routers module
+-----------------------------
+
+.. automodule:: views.product_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: views
+   :members:
+   :show-inheritance:
+   :undoc-members:

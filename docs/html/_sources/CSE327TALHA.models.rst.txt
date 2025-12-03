@@ -1,0 +1,45 @@
+CSE327TALHA.models package
+==========================
+
+Submodules
+----------
+
+CSE327TALHA.models.archived module
+----------------------------------
+
+.. automodule:: CSE327TALHA.models.archived
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.models.category module
+----------------------------------
+
+.. automodule:: CSE327TALHA.models.category
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.models.inventory module
+-----------------------------------
+
+.. automodule:: CSE327TALHA.models.inventory
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.models.product module
+---------------------------------
+
+.. automodule:: CSE327TALHA.models.product
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: CSE327TALHA.models
+   :members:
+   :show-inheritance:
+   :undoc-members:

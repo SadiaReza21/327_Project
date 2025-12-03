@@ -1,0 +1,29 @@
+schemas package
+===============
+
+Submodules
+----------
+
+schemas.category module
+-----------------------
+
+.. automodule:: schemas.category
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+schemas.product module
+----------------------
+
+.. automodule:: schemas.product
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: schemas
+   :members:
+   :show-inheritance:
+   :undoc-members:

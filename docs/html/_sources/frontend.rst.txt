@@ -1,0 +1,21 @@
+frontend package
+================
+
+Submodules
+----------
+
+frontend.frontend\_routers module
+---------------------------------
+
+.. automodule:: frontend.frontend_routers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: frontend
+   :members:
+   :show-inheritance:
+   :undoc-members:

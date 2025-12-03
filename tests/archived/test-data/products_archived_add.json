@@ -1,0 +1,12 @@
+[
+  {"product_id":1,"name":"Milk","price":2.5,"stock":0,"category_id":1,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":2,"name":"Bread","price":1.2,"stock":0,"category_id":1,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":3,"name":"Eggs","price":0.2,"stock":0,"category_id":2,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":4,"name":"Rice","price":0.8,"stock":0,"category_id":2,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":5,"name":"Butter","price":3.0,"stock":0,"category_id":3,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":6,"name":"Cheese","price":4.0,"stock":0,"category_id":3,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":7,"name":"Apples","price":0.5,"stock":0,"category_id":4,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":8,"name":"Bananas","price":0.3,"stock":0,"category_id":4,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":9,"name":"Tomatoes","price":0.4,"stock":0,"category_id":5,"is_available":false,"is_archived":true,"expected_archived":true},
+  {"product_id":10,"name":"Onions","price":0.2,"stock":0,"category_id":5,"is_available":false,"is_archived":true,"expected_archived":true}
+]

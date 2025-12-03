@@ -1,0 +1,45 @@
+CSE327TALHA.controllers package
+===============================
+
+Submodules
+----------
+
+CSE327TALHA.controllers.archived\_controller module
+---------------------------------------------------
+
+.. automodule:: CSE327TALHA.controllers.archived_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.controllers.category\_controller module
+---------------------------------------------------
+
+.. automodule:: CSE327TALHA.controllers.category_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.controllers.inventory\_controller module
+----------------------------------------------------
+
+.. automodule:: CSE327TALHA.controllers.inventory_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.controllers.product\_controller module
+--------------------------------------------------
+
+.. automodule:: CSE327TALHA.controllers.product_controller
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: CSE327TALHA.controllers
+   :members:
+   :show-inheritance:
+   :undoc-members:

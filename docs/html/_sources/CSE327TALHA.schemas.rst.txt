@@ -1,0 +1,37 @@
+CSE327TALHA.schemas package
+===========================
+
+Submodules
+----------
+
+CSE327TALHA.schemas.category module
+-----------------------------------
+
+.. automodule:: CSE327TALHA.schemas.category
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.schemas.inventory module
+------------------------------------
+
+.. automodule:: CSE327TALHA.schemas.inventory
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+CSE327TALHA.schemas.product module
+----------------------------------
+
+.. automodule:: CSE327TALHA.schemas.product
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: CSE327TALHA.schemas
+   :members:
+   :show-inheritance:
+   :undoc-members:

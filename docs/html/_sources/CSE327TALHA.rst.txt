@@ -1,0 +1,34 @@
+CSE327TALHA package
+===================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   CSE327TALHA.controllers
+   CSE327TALHA.db
+   CSE327TALHA.frontend
+   CSE327TALHA.models
+   CSE327TALHA.schemas
+   CSE327TALHA.views
+
+Submodules
+----------
+
+CSE327TALHA.main module
+-----------------------
+
+.. automodule:: CSE327TALHA.main
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: CSE327TALHA
+   :members:
+   :show-inheritance:
+   :undoc-members:

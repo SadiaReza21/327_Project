@@ -39,4 +39,23 @@ This is an online grocery shopping platform that is made to make the home essent
   python main.py
   ```
 - Go to http://localhost:8000/ and website is ready to use
-  
+
+### Run the project with multi branh
+
+The project supports **multi-branch deployment**, where each branch runs on a specific port. This allows testing multiple features or versions simultaneously without conflicts.
+
+**Default Ports by Branch / Contributor:**
+- `talha` branch: port 8001  
+- `sadia` branch: port 8002  
+- `pragga` branch: port 8003  
+- `fabliha` branch: port 8004  
+- `emu` branch: port 8005  
+
+**Run the project using Python**
+
+- **Run talha branch on port 8001**
+```uvicorn main:app --reload --port 8001```
+- **Run sadia branch on port 8002**
+```uvicorn main:app --reload --port 8002```
+- Do this for all five branches. Now the whole project will be live.
+

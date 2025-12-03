@@ -60,7 +60,24 @@ class Buyer:
 
 
     def authenticate(self, email, password):
-        
+        """
+        Authenticate a buyer with email and password.
+
+        Verifies the buyer's credentials against the database and returns
+        the buyer's ID and email if authentication is successful.
+
+        Args:
+        email (str): Buyer's email address.
+        password (str): Buyer's password in plaintext.
+
+        Returns:
+          dict: A dictionary containing:
+            - ``success`` (bool): True if authentication succeeds, False otherwise.
+            - ``id`` (int): Buyer's ID (only if success is True).
+            - ``email`` (str): Buyer's email (only if success is True).
+
+    
+        """
         connection = self.db.connect()
         if not connection:
             return False
@@ -85,7 +102,26 @@ class Buyer:
             connection.close()
 
     def get_buyer(self, id): 
-        
+        """
+        Retrieve buyer information by ID.
+
+        Fetches the buyer's profile details (name, phone, email) from
+        the database using their unique ID.
+
+        Args:
+            id (int): Buyer's unique identifier.
+
+        Returns:
+            dict: A dictionary containing:
+                - ``name`` (str): Buyer's full name.
+                - ``phone`` (str): Buyer's phone number.
+                - ``email`` (str): Buyer's email address.
+            
+            Or on error:
+                - ``status`` (str): "error".
+                - ``message`` (str): Error description.
+
+        """
         connection = self.db.connect()
         if not connection:
             return False
@@ -108,7 +144,24 @@ class Buyer:
             connection.close()
 
     def edit_profile(self, id, name, phone):
-        
+        """
+         Update a buyer's profile information.
+
+        Updates the name and phone number for a buyer identified by
+        their unique ID.
+
+        Args:
+            id (int): Buyer's unique identifier.
+            name (str): New name for the buyer.
+            phone (str): New phone number for the buyer.
+
+        Returns:
+            dict: A dictionary containing:
+                - ``status`` (str): "success" or "error".
+                - ``message`` (str): Description of the update result.
+
+        """
+            
         connection = self.db.connect()
         if not connection:
             return False

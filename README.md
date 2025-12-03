@@ -22,7 +22,7 @@ This is an online grocery shopping platform that is made to make the home essent
 - Then choose the bazar_kori.sql file from the git repo cloned.
 - This will create the needed tables for you.
 
-### Running the project
+### Running the project:
 - Open the terminal and install necessary python packages
 - Run the command
   ```
@@ -40,7 +40,7 @@ This is an online grocery shopping platform that is made to make the home essent
   ```
 - Go to http://localhost:8000/ and website is ready to use
 
-### Run the project with multi branh
+### Run the project with multi branh:
 
 The project supports **multi-branch deployment**, where each branch runs on a specific port. This allows testing multiple features or versions simultaneously without conflicts.
 

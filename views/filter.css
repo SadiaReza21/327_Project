@@ -1,4 +1,3 @@
-/* CSS Variables - Enhanced Color Scheme */
 :root {
     --primary-color: #4CAF50;
     --primary-dark: #388E3C;
@@ -47,7 +46,6 @@ body {
     padding: 0 24px;
 }
 
-/* Header Styles */
 .header {
     background-color: var(--bg-light);
     box-shadow: var(--shadow);
@@ -160,7 +158,6 @@ body {
     margin-left: 4px;
 }
 
-/* Hamburger Button */
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -185,7 +182,6 @@ body {
     border-radius: 1px;
 }
 
-/* Sidebar Styles */
 .sidebar {
     position: fixed;
     top: 0;

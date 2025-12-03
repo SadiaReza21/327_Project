@@ -1,4 +1,4 @@
-# services/product_service.py
+
 from models.product_model import ProductModel, SearchRequestModel, SearchResponseModel
 from typing import List, Optional
 import re

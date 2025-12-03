@@ -40,7 +40,7 @@ class FilterService:
     def fun_filter_products(
         self, 
         filter_request: FilterRequestModel
-    ) -> FilterResponseModel:
+          ) -> FilterResponseModel:
         """
         Filter products based on category and price range
         Returns filtered products with total count and applied filters metadata

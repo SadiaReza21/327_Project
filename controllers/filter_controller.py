@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
-from typing import Optional # ADD THIS IMPORT
+from typing import Optional 
 from models.filter_model import (
     FilterRequestModel,
     FilterResponseModel,
@@ -7,7 +7,7 @@ from models.filter_model import (
 )
 from services.filter_service import (
     FilterService,
-    InvalidFilterInputError, # Make sure this is imported
+    InvalidFilterInputError, 
     DatabaseConnectionError
 )
 from services.product_service import ProductService
@@ -25,7 +25,7 @@ class FilterController:
         self.fun_setup_routes()
    
    
-    def fun_setup_routes(self):
+    def fun_setup_routes(self): 
         """
         Setup API routes for filter functionality
         """

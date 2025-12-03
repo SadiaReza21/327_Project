@@ -6,15 +6,13 @@
     <title>Filter Products - Bazar Kori</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- TRY BOTH PATHS - One of these will work -->
-    <link rel="stylesheet" href="/static/filter.css">  <!-- Try this first -->
-    <!-- <link rel="stylesheet" href="/views/filter.css"> -->  <!-- If above fails, try this -->
+
+    <link rel="stylesheet" href="/static/filter.css">  
     
-    <script src="/static/filter.js" defer></script>  <!-- Try this first -->
-    <!-- <script src="/views/filter.js" defer></script> -->  <!-- If above fails, try this -->
+    <script src="/static/filter.js" defer></script>  
 </head>
 <body>
-    <!-- Header Section -->
+    
     <header class="header">
         <div class="container">
             <div class="logo-section">
@@ -38,7 +36,7 @@
         </div>
     </header>
 
-    <!-- Sidebar Filter -->
+   
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2><i class="fas fa-sliders-h"></i> Filter Products</h2>
@@ -46,7 +44,7 @@
         </div>
         
         <div class="filter-section">
-            <!-- Search -->
+            
             <div class="filter-group">
                 <h3 class="filter-title"><i class="fas fa-search"></i> Search Products</h3>
                 <div class="search-box">
@@ -60,18 +58,17 @@
                 </div>
             </div>
 
-            <!-- Category Filter -->
+           
             <div class="filter-group">
                 <h3 class="filter-title"><i class="fas fa-tags"></i> Categories</h3>
                 <div class="category-checkboxes" id="categoriesContainer">
-                    <!-- Categories will be loaded here -->
+                    
                     <div class="skeleton-checkbox"></div>
                     <div class="skeleton-checkbox"></div>
                     <div class="skeleton-checkbox"></div>
                 </div>
             </div>
 
-            <!-- Price Range Filter -->
             <div class="filter-group">
                 <h3 class="filter-title"><i class="fas fa-tag"></i> Price Range</h3>
                 <div class="price-range">
@@ -116,7 +113,7 @@
                 </div>
             </div>
 
-            <!-- Sort Options -->
+           
             <div class="filter-group">
                 <h3 class="filter-title"><i class="fas fa-sort"></i> Sort By</h3>
                 <select class="filter-select" id="sortSelect">
@@ -128,7 +125,7 @@
                 </select>
             </div>
 
-            <!-- Stock Filter -->
+            
             <div class="filter-group">
                 <h3 class="filter-title"><i class="fas fa-box"></i> Availability</h3>
                 <div class="availability-filter">
@@ -140,7 +137,6 @@
                 </div>
             </div>
 
-            <!-- Filter Actions -->
             <div class="filter-actions">
                 <button class="apply-btn" id="applyFilters">
                     <i class="fas fa-check"></i> Apply Filters
@@ -152,13 +148,10 @@
         </div>
     </aside>
 
-    <!-- Overlay -->
     <div class="overlay hidden" id="overlay"></div>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Page Header -->
             <div class="page-header">
                 <div class="header-top">
                     <h2 class="page-title">Fresh Grocery Products</h2>
@@ -170,11 +163,9 @@
                     Browse our fresh selection of groceries. Filter by category, price, and more.
                 </p>
                 <div class="active-filters" id="activeFilters">
-                    <!-- Active filters will appear here -->
                 </div>
             </div>
 
-            <!-- Results Section -->
             <div class="results-section">
                 <div class="results-header">
                     <div>
@@ -190,13 +181,11 @@
                     </div>
                 </div>
 
-                <!-- Loading Spinner -->
                 <div class="loading-spinner" id="loadingSpinner">
                     <div class="spinner"></div>
                     <p>Loading fresh products...</p>
                 </div>
 
-                <!-- Messages -->
                 <div class="no-results hidden" id="noResultsMessage">
                     <i class="fas fa-search fa-3x"></i>
                     <h3>No products match your filters</h3>
@@ -211,21 +200,17 @@
                     <button class="retry-btn" id="retryBtn">Retry</button>
                 </div>
 
-                <!-- Products Grid -->
                 <div class="products-grid grid-view" id="productsGrid">
-                    <!-- Products will be loaded here -->
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Cart Notification -->
     <div class="cart-notification hidden" id="cartNotification">
         <i class="fas fa-check-circle"></i>
         <span>Added to cart!</span>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">

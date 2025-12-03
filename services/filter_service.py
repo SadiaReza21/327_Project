@@ -12,14 +12,14 @@ class FilterError(Exception):
 
 class DatabaseConnectionError(FilterError):
     """
-    Database connection exception
+    Raised when database operations fail (e.g., connection lost, query error)
     """
     pass
 
 
 class InvalidFilterInputError(FilterError):
     """
-    Invalid filter input exception
+    Raised when filter parameters are logically invalid (e.g., min_price > max_price)
     """
     pass
 
@@ -27,9 +27,13 @@ class InvalidFilterInputError(FilterError):
 class FilterService:
     """
     Service layer for product filtering operations
+    Performs server-side filtering by category and price range
     """
     
     def __init__(self, product_service):
+        """
+        Initialize with a ProductService instance to access product data
+        """
         self.product_service = product_service
     
     
@@ -39,6 +43,7 @@ class FilterService:
     ) -> FilterResponseModel:
         """
         Filter products based on category and price range
+        Returns filtered products with total count and applied filters metadata
         """
         try:
             self.fun_validate_filter_input(filter_request)
@@ -74,6 +79,7 @@ class FilterService:
     def fun_validate_filter_input(self, filter_request: FilterRequestModel):
         """
         Validate filter input parameters
+        Ensures min_price is not greater than max_price
         """
         if (filter_request.min_price is not None and 
             filter_request.max_price is not None):
@@ -92,6 +98,8 @@ class FilterService:
     ) -> List[ProductModel]:
         """
         Apply category and price filters to products
+        Only includes available products (is_available == True)
+        Case-insensitive category matching
         """
         filtered_results = []
         
@@ -122,6 +130,7 @@ class FilterService:
     def fun_get_categories(self) -> List[str]:
         """
         Get all available product categories
+        Delegates to ProductService and wraps errors
         """
         try:
             return self.product_service.fun_get_categories()

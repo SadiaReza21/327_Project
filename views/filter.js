@@ -1,9 +1,14 @@
 // filter.js - UPDATED FOR YOUR FASTAPI BACKEND
+/**
+ * Main client-side application for the advanced product filtering page (/filter)
+ * Handles real-time filtering, sorting, searching, category selection, price range,
+ * cart counter, favorites, responsive sidebar and full integration with FastAPI backend.
+ */
 document.addEventListener('DOMContentLoaded', function() {
     initFilterApp();
 });
 
-// Global state
+// Global application state
 let filterState = {
     categories: [],
     minPrice: 0,
@@ -15,19 +20,22 @@ let filterState = {
     cartCount: 0
 };
 
-// Initialize application
+/**
+ * Application entry point – initializes everything
+ */
 function initFilterApp() {
     loadInitialData();
     setupEventListeners();
     updateCartCount();
 }
 
-// Load initial data from YOUR API
+/**
+ * Loads categories and products when the page first loads
+ */
 async function loadInitialData() {
     showLoading(true);
     
     try {
-        // Load categories and products in parallel from YOUR API
         const [categories, productsResponse] = await Promise.all([
             fetchCategories(),
             fetchFilteredProducts()
@@ -44,7 +52,6 @@ async function loadInitialData() {
         displayProducts(productsResponse);
         updateResultsInfo(productsResponse.total_count || productsResponse.products?.length || 0, 'loaded');
         
-        // Initialize price range
         const products = productsResponse.products || productsResponse || [];
         initializePriceSlider(products);
         
@@ -56,9 +63,10 @@ async function loadInitialData() {
     }
 }
 
-// Setup event listeners
+/**
+ * Registers all event listeners for interactive elements
+ */
 function setupEventListeners() {
-    // Sidebar toggle
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const closeBtn = document.getElementById('closeBtn');
     const filterToggleBtn = document.getElementById('filterToggleBtn');
@@ -69,7 +77,6 @@ function setupEventListeners() {
     if (filterToggleBtn) filterToggleBtn.addEventListener('click', toggleSidebar);
     if (overlay) overlay.addEventListener('click', toggleSidebar);
     
-    // Search
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         let searchTimeout;
@@ -82,7 +89,6 @@ function setupEventListeners() {
         });
     }
     
-    // Price slider
     const priceSlider = document.getElementById('priceSlider');
     if (priceSlider) {
         priceSlider.addEventListener('input', (e) => {
@@ -93,7 +99,6 @@ function setupEventListeners() {
         });
     }
     
-    // Price inputs
     const minPriceInput = document.getElementById('minPrice');
     const maxPriceInput = document.getElementById('maxPrice');
     
@@ -111,7 +116,6 @@ function setupEventListeners() {
         });
     }
     
-    // Sort select
     const sortSelect = document.getElementById('sortSelect');
     if (sortSelect) {
         sortSelect.addEventListener('change', (e) => {
@@ -120,7 +124,6 @@ function setupEventListeners() {
         });
     }
     
-    // In stock filter
     const inStockCheckbox = document.getElementById('inStockOnly');
     if (inStockCheckbox) {
         inStockCheckbox.addEventListener('change', (e) => {
@@ -129,7 +132,6 @@ function setupEventListeners() {
         });
     }
     
-    // Filter buttons
     const applyBtn = document.getElementById('applyFilters');
     const resetBtn = document.getElementById('resetFilters');
     const clearAllBtn = document.getElementById('clearAllFilters');
@@ -140,7 +142,6 @@ function setupEventListeners() {
     if (clearAllBtn) clearAllBtn.addEventListener('click', resetFilters);
     if (retryBtn) retryBtn.addEventListener('click', loadInitialData);
     
-    // View toggle
     const viewButtons = document.querySelectorAll('.view-btn');
     viewButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -149,9 +150,7 @@ function setupEventListeners() {
         });
     });
     
-    // Event delegation for dynamic elements
     document.addEventListener('click', (e) => {
-        // Add to cart
         if (e.target.classList.contains('add-to-cart') || 
             e.target.closest('.add-to-cart')) {
             const button = e.target.classList.contains('add-to-cart') 
@@ -161,7 +160,6 @@ function setupEventListeners() {
             if (productId) handleAddToCart(productId);
         }
         
-        // Remove filter tag
         if (e.target.classList.contains('remove-filter') || 
             e.target.closest('.remove-filter')) {
             const button = e.target.classList.contains('remove-filter') 
@@ -172,7 +170,6 @@ function setupEventListeners() {
             removeFilter(filterType, filterValue);
         }
         
-        // Favorite toggle
         if (e.target.classList.contains('product-favorite') || 
             e.target.closest('.product-favorite')) {
             const button = e.target.classList.contains('product-favorite') 
@@ -183,7 +180,9 @@ function setupEventListeners() {
     });
 }
 
-// Toggle sidebar
+/**
+ * Toggles the mobile filter sidebar
+ */
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
@@ -206,7 +205,10 @@ function toggleSidebar() {
     }
 }
 
-// Fetch categories from YOUR API
+/**
+ * Fetches the list of available categories from the backend
+ * @returns {Promise<Array>} Array of category objects with id, name, icon
+ */
 async function fetchCategories() {
     try {
         const response = await fetch('/api/v1/filter/categories');
@@ -214,7 +216,6 @@ async function fetchCategories() {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         const categories = await response.json();
-        // Convert string categories to objects with icons
         return categories.map(categoryName => ({
             id: categoryName.toLowerCase().replace(/\s+/g, '_'),
             name: categoryName,
@@ -222,7 +223,6 @@ async function fetchCategories() {
         }));
     } catch (error) {
         console.error('Error fetching categories:', error);
-        // Return default categories if API fails
         return [
             { id: 'fruits', name: 'Fruits', icon: 'fas fa-apple-alt' },
             { id: 'vegetables', name: 'Vegetables', icon: 'fas fa-carrot' },
@@ -235,19 +235,19 @@ async function fetchCategories() {
     }
 }
 
-// Fetch filtered products from YOUR API
+/**
+ * Calls the backend filter endpoint with current filter state
+ * @returns {Promise<Object>} Filtered products response
+ */
 async function fetchFilteredProducts() {
     try {
-        // Build query parameters for YOUR API
         const params = new URLSearchParams();
         
-        // Get selected categories
         const selectedCategories = filterState.categories
             .filter(cat => cat.selected)
             .map(cat => cat.name);
         
         if (selectedCategories.length > 0) {
-            // For now, send first category (your API supports single category)
             params.append('category', selectedCategories[0]);
         }
         
@@ -285,7 +285,11 @@ async function fetchFilteredProducts() {
     }
 }
 
-// Helper function to get icon for category
+/**
+ * Returns the appropriate FontAwesome icon class for a category
+ * @param {string} categoryName 
+ * @returns {string} Icon class
+ */
 function getCategoryIcon(categoryName) {
     const iconMap = {
         'Fruits': 'fas fa-apple-alt',
@@ -299,14 +303,15 @@ function getCategoryIcon(categoryName) {
     return iconMap[categoryName] || 'fas fa-tag';
 }
 
-// Populate categories in sidebar
+/**
+ * Renders category checkboxes in the sidebar
+ */
 function populateCategories() {
     const container = document.getElementById('categoriesContainer');
     if (!container) return;
     
     container.innerHTML = '';
     
-    // Get unique categories from state
     const uniqueCategories = [...new Set(filterState.categories.map(c => c.name))];
     
     uniqueCategories.forEach(categoryName => {
@@ -345,14 +350,16 @@ function populateCategories() {
     });
 }
 
-// Display products
+/**
+ * Renders the product grid
+ * @param {Object} productsResponse - API response containing products array
+ */
 function displayProducts(productsResponse) {
     const container = document.getElementById('productsGrid');
     if (!container) return;
     
     container.innerHTML = '';
     
-    // Check if productsResponse has products property
     const products = productsResponse.products || productsResponse;
     
     if (!products || products.length === 0) {
@@ -370,12 +377,15 @@ function displayProducts(productsResponse) {
     });
 }
 
-// Create product card for YOUR data structure
+/**
+ * Creates a single product card element
+ * @param {Object} product - Product data from backend
+ * @returns {HTMLElement} Product card div
+ */
 function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card';
     
-    // Map category to icon for placeholder
     const categoryIconMap = {
         'Fruits': 'fas fa-apple-alt',
         'Vegetables': 'fas fa-carrot',
@@ -388,7 +398,6 @@ function createProductCard(product) {
     
     const iconClass = categoryIconMap[product.category] || 'fas fa-shopping-basket';
     
-    // Stock status
     const stockQuantity = product.stock_quantity || 0;
     const isAvailable = product.is_available !== false;
     
@@ -407,7 +416,6 @@ function createProductCard(product) {
         stockText = `In Stock (${stockQuantity})`;
     }
     
-    // Generate a random rating for demo (3.0 to 5.0 stars)
     const rating = (Math.random() * 2 + 3).toFixed(1);
     const stars = Math.round(rating);
     
@@ -458,7 +466,11 @@ function createProductCard(product) {
     return card;
 }
 
-// Helper: Get unit based on product name
+/**
+ * Returns display unit based on product name
+ * @param {string} productName 
+ * @returns {string} Unit string
+ */
 function getUnitForProduct(productName) {
     const name = productName.toLowerCase();
     if (name.includes('milk') || name.includes('juice')) return 'gallon';
@@ -469,7 +481,9 @@ function getUnitForProduct(productName) {
     return 'item';
 }
 
-// Apply filters
+/**
+ * Triggers product re-fetch when any filter changes
+ */
 async function applyFilters() {
     showLoading(true);
     updateActiveFilters();
@@ -486,19 +500,18 @@ async function applyFilters() {
     }
 }
 
-// Reset filters
+/**
+ * Resets all filters to default state
+ */
 function resetFilters() {
-    // Reset category selections
     filterState.categories.forEach(cat => cat.selected = true);
     
-    // Reset other filters
     filterState.minPrice = 0;
     filterState.maxPrice = 100;
     filterState.searchQuery = '';
     filterState.sortBy = 'default';
     filterState.inStockOnly = true;
     
-    // Update UI
     document.getElementById('searchInput').value = '';
     document.getElementById('minPrice').value = '0';
     document.getElementById('maxPrice').value = '100';
@@ -510,7 +523,11 @@ function resetFilters() {
     applyFilters();
 }
 
-// Remove specific filter
+/**
+ * Removes a single active filter when user clicks the × button
+ * @param {string} type - 'category', 'search', or 'price'
+ * @param {string} value - Value to remove (used only for category)
+ */
 function removeFilter(type, value) {
     switch (type) {
         case 'category':
@@ -534,14 +551,14 @@ function removeFilter(type, value) {
     applyFilters();
 }
 
-// Update active filters display
+/**
+ * Updates the active filter tags below the search bar */
 function updateActiveFilters() {
     const container = document.getElementById('activeFilters');
     if (!container) return;
     
     container.innerHTML = '';
     
-    // Selected categories (only show if some are unselected)
     const selectedCategories = filterState.categories.filter(cat => cat.selected);
     const allCategories = filterState.categories.length;
     
@@ -553,13 +570,12 @@ function updateActiveFilters() {
                 <i class="fas fa-tag"></i> ${cat.name}
                 <button class="remove remove-filter" 
                         data-filter-type="category" 
-                        data-filter-value="${cat.name}">×</button>
+                        data-filter-value="${cat.name}">x</button>
             `;
             container.appendChild(tag);
         });
     }
     
-    // Price filter
     if (filterState.minPrice > 0 || filterState.maxPrice < 100) {
         const tag = document.createElement('span');
         tag.className = 'filter-tag';
@@ -567,25 +583,28 @@ function updateActiveFilters() {
             <i class="fas fa-dollar-sign"></i> 
             $${filterState.minPrice} - $${filterState.maxPrice}
             <button class="remove remove-filter" 
-                    data-filter-type="price">×</button>
+                    data-filter-type="price">x</button>
         `;
         container.appendChild(tag);
     }
     
-    // Search query
     if (filterState.searchQuery) {
         const tag = document.createElement('span');
         tag.className = 'filter-tag';
         tag.innerHTML = `
             <i class="fas fa-search"></i> "${filterState.searchQuery}"
             <button class="remove remove-filter" 
-                    data-filter-type="search">×</button>
+                    data-filter-type="search">x</button>
         `;
         container.appendChild(tag);
     }
 }
 
-// Update results info
+/**
+ * Updates result count and header text
+ * @param {number} count - Number of products
+ * @param {string} action - 'loaded' or 'filtered'
+ */
 function updateResultsInfo(count, action) {
     const countElement = document.getElementById('resultsCount');
     const titleElement = document.getElementById('resultsTitle');
@@ -609,7 +628,10 @@ function updateResultsInfo(count, action) {
     }
 }
 
-// Initialize price slider
+/**
+ * Initializes price slider range based on actual product prices
+ * @param {Array} products - List of products
+ */
 function initializePriceSlider(products) {
     const slider = document.getElementById('priceSlider');
     const maxPriceInput = document.getElementById('maxPrice');
@@ -627,7 +649,10 @@ function initializePriceSlider(products) {
     }
 }
 
-// Set view mode
+/**
+ * Switches between grid and list view
+ * @param {string} mode - 'grid' or 'list'
+ */
 function setViewMode(mode) {
     const container = document.getElementById('productsGrid');
     const viewButtons = document.querySelectorAll('.view-btn');
@@ -639,29 +664,30 @@ function setViewMode(mode) {
     container.className = `products-grid ${mode}-view`;
 }
 
-// Handle add to cart
+/**
+ * Handles "Add to Cart" button click (demo version)
+ * @param {string} productId 
+ */
 function handleAddToCart(productId) {
-    // For now, just increment cart count
     filterState.cartCount++;
     updateCartCount();
     showCartNotification();
-    
-    // In a real app, you would:
-    // 1. Send to backend API
-    // 2. Update cart with actual product
     console.log('Added product to cart:', productId);
 }
 
-// Update cart count
+/**
+ * Updates all cart counter badges
+ */
 function updateCartCount() {
     const countElements = document.querySelectorAll('.cart-count');
-    
     countElements.forEach(el => {
         el.textContent = filterState.cartCount;
     });
 }
 
-// Show cart notification
+/**
+ * Shows temporary "Added to cart" notification
+ */
 function showCartNotification() {
     const notification = document.getElementById('cartNotification');
     notification.classList.remove('hidden');
@@ -675,7 +701,10 @@ function showCartNotification() {
     }, 2000);
 }
 
-// Toggle favorite
+/**
+ * Toggles favorite heart icon state
+ * @param {HTMLElement} button - The favorite button element
+ */
 function toggleFavorite(button) {
     const icon = button.querySelector('i');
     const isActive = button.classList.contains('active');
@@ -689,7 +718,10 @@ function toggleFavorite(button) {
     }
 }
 
-// Show loading
+/**
+ * Shows or hides the loading spinner
+ * @param {boolean} show 
+ */
 function showLoading(show) {
     const spinner = document.getElementById('loadingSpinner');
     const productsGrid = document.getElementById('productsGrid');
@@ -703,7 +735,10 @@ function showLoading(show) {
     }
 }
 
-// Show error message
+/**
+ * Displays error overlay with custom message
+ * @param {string} message 
+ */
 function showErrorMessage(message = 'An error occurred. Please try again.') {
     const errorElement = document.getElementById('errorMessage');
     if (errorElement) {
@@ -712,9 +747,10 @@ function showErrorMessage(message = 'An error occurred. Please try again.') {
     }
 }
 
-// Initialize price range on load
+/**
+ * Sets initial price input values when page fully loads
+ */
 window.addEventListener('load', () => {
-    // Set initial price range
     const minPriceInput = document.getElementById('minPrice');
     const maxPriceInput = document.getElementById('maxPrice');
     const priceSlider = document.getElementById('priceSlider');

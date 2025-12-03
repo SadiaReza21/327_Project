@@ -8,6 +8,10 @@ import os
 
 
 class BazarKoriApp:
+    """
+    Main application factory class
+    Sets up FastAPI app with routes, middleware, and static files
+    """
 
     def __init__(self):
         self.app = FastAPI(
@@ -36,12 +40,12 @@ class BazarKoriApp:
         )
 
     def fun_setup_routes(self):
-        """API endpoints"""
+        """Register all API controllers"""
         self.app.include_router(self.search_controller.router)
         self.app.include_router(self.filter_controller.router)
 
     def fun_setup_static_files(self):
-        """Serve CSS, JS, images at /static/..."""
+        """Serve CSS, JS, images from /views folder as /static"""
         views_path = os.path.join(os.path.dirname(__file__), "views")
         if os.path.exists(views_path):
             self.app.mount("/static", StaticFiles(directory=views_path), name="static")
@@ -49,11 +53,12 @@ class BazarKoriApp:
             print("Warning: 'views' folder not found!")
 
     def fun_setup_html_routes(self):
-        """Serve the two HTML pages"""
+        """Serve the two main HTML pages"""
 
         # Home page → search page
         @self.app.get("/", response_class=HTMLResponse)
         async def serve_search_page():
+            """Serve search.html as the homepage"""
             file_path = os.path.join(os.path.dirname(__file__), "views", "search.html")
             if not os.path.exists(file_path):
                 return HTMLResponse("search.html not found", status_code=404)
@@ -63,6 +68,7 @@ class BazarKoriApp:
         # Filter/Browse page
         @self.app.get("/filter", response_class=HTMLResponse)
         async def serve_filter_page():
+            """Serve filter.html for advanced browsing"""
             file_path = os.path.join(os.path.dirname(__file__), "views", "filter.html")
             if not os.path.exists(file_path):
                 return HTMLResponse("filter.html not found", status_code=404)
@@ -70,11 +76,13 @@ class BazarKoriApp:
                 return f.read()
 
     def fun_get_app(self):
+        """Return the configured FastAPI instance"""
         return self.app
 
 
-# Factory
+# Factory function for Uvicorn
 def fun_create_app():
+    """Factory function to create app instance"""
     app = BazarKoriApp()
     return app.fun_get_app()
 

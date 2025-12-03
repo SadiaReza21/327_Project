@@ -3,35 +3,42 @@ const API_BASE_URL = 'http://localhost:8000';
 const SEARCH_ENDPOINT = '/api/v1/search';
 const PRODUCTS_ENDPOINT = '/api/v1/products';
 const CATEGORIES_ENDPOINT = '/api/v1/categories';
-const DEBOUNCE_DELAY = 500;
+const DEBOUNCE_DELAY = 500;               // ms delay for search input debouncing
 
 
 // MVC View Controller
+/**
+ * Handles all DOM interactions and UI updates for the search page
+ */
 class SearchView {
     
     constructor() {
-        this.search_form_element = document.getElementById('searchForm');
-        this.search_input_element = document.getElementById('searchInput');
-        this.search_button_element = document.getElementById('searchButton');
-        this.category_filter_element = document.getElementById('categoryFilter');
-        this.min_price_element = document.getElementById('minPrice');
-        this.max_price_element = document.getElementById('maxPrice');
-        this.apply_filters_button = document.getElementById('applyFilters');
-        this.reset_filters_button = document.getElementById('resetFilters');
-        this.loading_spinner_element = document.getElementById('loadingSpinner');
+        this.search_form_element        = document.getElementById('searchForm');
+        this.search_input_element       = document.getElementById('searchInput');
+        this.search_button_element      = document.getElementById('searchButton');
+        this.category_filter_element    = document.getElementById('categoryFilter');
+        this.min_price_element          = document.getElementById('minPrice');
+        this.max_price_element          = document.getElementById('maxPrice');
+        this.apply_filters_button       = document.getElementById('applyFilters');
+        this.reset_filters_button       = document.getElementById('resetFilters');
+        this.loading_spinner_element    = document.getElementById('loadingSpinner');
         this.no_results_message_element = document.getElementById('noResultsMessage');
         this.empty_search_message_element = document.getElementById('emptySearchMessage');
-        this.error_message_element = document.getElementById('errorMessage');
-        this.products_grid_element = document.getElementById('productsGrid');
+        this.error_message_element      = document.getElementById('errorMessage');
+        this.products_grid_element      = document.getElementById('productsGrid');
         
-        this.current_search_query = '';
-        this.current_category_filter = '';
-        this.current_min_price = null;
-        this.current_max_price = null;
-        this.search_timeout_id = null;
+        this.current_search_query       = '';
+        this.current_category_filter    = '';
+        this.current_min_price          = null;
+        this.current_max_price          = null;
+        this.search_timeout_id          = null;
     }
     
     
+    /**
+     * Binds all UI event listeners and passes controller methods as callbacks
+     * @param {SearchController} controller 
+     */
     fun_initialize_event_listeners(controller) {
         this.search_form_element.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -52,6 +59,7 @@ class SearchView {
     }
     
     
+    /** Shows loading spinner and clears previous content */
     fun_show_loading_spinner() {
         this.fun_hide_all_messages();
         this.loading_spinner_element.classList.remove('hidden');
@@ -59,11 +67,13 @@ class SearchView {
     }
     
     
-    fun_hide_loading_spinner() {
+    /** Hides the loading spinner */
+    fun_tw_hide_loading_spinner() {
         this.loading_spinner_element.classList.add('hidden');
     }
     
     
+    /** Displays "no results found" message */
     fun_show_no_results_message() {
         this.fun_hide_all_messages();
         this.no_results_message_element.classList.remove('hidden');
@@ -71,6 +81,7 @@ class SearchView {
     }
     
     
+    /** Shows message when search field is empty */
     fun_show_empty_search_message() {
         this.fun_hide_all_messages();
         this.empty_search_message_element.classList.remove('hidden');
@@ -78,6 +89,7 @@ class SearchView {
     }
     
     
+    /** Displays generic error message */
     fun_show_error_message() {
         this.fun_hide_all_messages();
         this.error_message_element.classList.remove('hidden');
@@ -85,6 +97,7 @@ class SearchView {
     }
     
     
+    /** Hides every status message / spinner */
     fun_hide_all_messages() {
         this.loading_spinner_element.classList.add('hidden');
         this.no_results_message_element.classList.add('hidden');
@@ -93,6 +106,10 @@ class SearchView {
     }
     
     
+    /**
+     * Renders an array of products into the grid
+     * @param {Array} products_array 
+     */
     fun_display_products(products_array) {
         if (!Array.isArray(products_array) || products_array.length === 0) {
             this.fun_show_no_results_message();
@@ -108,16 +125,21 @@ class SearchView {
     }
     
     
+    /**
+     * Generates HTML for a single product card
+     * @param {Object} product_data 
+     * @returns {string} HTML string
+     */
     fun_create_product_card(product_data) {
         const stock_status_class = product_data.stock_quantity > 10 ? 'stock-available' : 'stock-low';
-        const stock_status_text = product_data.stock_quantity > 10 ? 'In Stock' : 'Low Stock';
+        const stock_status_text  = product_data.stock_quantity > 10 ? 'In Stock' : 'Low Stock';
         
         return `
             <div class="product-card" data-product-id="${product_data.product_id}">
                 <div class="product-image">
                     ${product_data.image_url ? 
                         `<img src="${product_data.image_url}" alt="${product_data.name}" loading="lazy">` : 
-                        '📱'
+                        'Image'
                     }
                 </div>
                 <div class="product-info">
@@ -132,6 +154,10 @@ class SearchView {
     }
     
     
+    /**
+     * Populates the category <select> dropdown
+     * @param {Array<string>} categories_array 
+     */
     fun_populate_categories(categories_array) {
         const category_options = categories_array.map(category => 
             `<option value="${this.fun_escape_html(category)}">${this.fun_escape_html(category)}</option>`
@@ -142,6 +168,7 @@ class SearchView {
     }
     
     
+    /** Reads current values from filter inputs */
     fun_get_search_filters() {
         return {
             query: this.search_input_element.value.trim(),
@@ -152,14 +179,19 @@ class SearchView {
     }
     
     
+    /**
+     * Stores the latest applied filter values (for UI persistence)
+     * @param {Object} filters 
+     */
     fun_update_search_state(filters) {
-        this.current_search_query = filters.query;
+        this.current_search_query    = filters.query;
         this.current_category_filter = filters.category;
-        this.current_min_price = filters.min_price;
-        this.current_max_price = filters.max_price;
+        this.current_min_price       = filters.min_price;
+        this.current_max_price       = filters.max_price;
     }
     
     
+    /** Clears filter input fields */
     fun_reset_filters_ui() {
         this.category_filter_element.value = '';
         this.min_price_element.value = '';
@@ -167,6 +199,7 @@ class SearchView {
     }
     
     
+    /** Cancels any pending debounced search */
     fun_clear_search_timeout() {
         if (this.search_timeout_id) {
             clearTimeout(this.search_timeout_id);
@@ -175,11 +208,21 @@ class SearchView {
     }
     
     
+    /**
+     * Sets a new debounced timeout
+     * @param {Function} callback 
+     * @param {number} delay 
+     */
     fun_set_search_timeout(callback, delay) {
         this.search_timeout_id = setTimeout(callback, delay);
     }
     
     
+    /**
+     * Simple XSS prevention for displayed text
+     * @param {string} unsafe_text 
+     * @returns {string} Safe HTML string
+     */
     fun_escape_html(unsafe_text) {
         const text_area_element = document.createElement('textarea');
         text_area_element.textContent = unsafe_text;
@@ -189,15 +232,19 @@ class SearchView {
 
 
 // MVC Controller
+/**
+ * Orchestrates interaction between View and ApiService
+ */
 class SearchController {
     
     constructor(view, api_service) {
-        this.view = view;
+        this.view        = view;
         this.api_service = api_service;
         this.is_initialized = false;
     }
     
     
+    /** Initializes the whole search module (called once) */
     async fun_initialize() {
         if (this.is_initialized) return;
         
@@ -209,6 +256,7 @@ class SearchController {
     }
     
     
+    /** Loads categories + all products on first page load */
     async fun_load_initial_data() {
         try {
             const [categories, products] = await Promise.all([
@@ -226,12 +274,17 @@ class SearchController {
     }
     
     
+    /** Handles form submit (Enter key) – immediate search */
     fun_handle_search_submit() {
         this.view.fun_clear_search_timeout();
         this.fun_execute_search();
     }
     
     
+    /**
+     * Handles live typing – debounced search
+     * @param {string} search_term 
+     */
     fun_handle_search_input(search_term) {
         this.view.fun_clear_search_timeout();
         
@@ -250,6 +303,7 @@ class SearchController {
     }
     
     
+    /** Triggered by "Apply Filters" button */
     fun_apply_filters() {
         const filters = this.view.fun_get_search_filters();
         this.view.fun_update_search_state(filters);
@@ -260,6 +314,7 @@ class SearchController {
     }
     
     
+    /** Central search execution logic */
     async fun_execute_search() {
         const filters = this.view.fun_get_search_filters();
         
@@ -278,11 +333,12 @@ class SearchController {
             console.error('Search error:', error);
             this.view.fun_show_error_message();
         } finally {
-            this.view.fun_hide_loading_spinner();
+            this.view.fun_tw_hide_loading_spinner();
         }
     }
     
     
+    /** Resets filters and re-runs current search */
     fun_reset_filters() {
         this.view.fun_reset_filters_ui();
         this.fun_execute_search();
@@ -291,8 +347,16 @@ class SearchController {
 
 
 // API Service Layer
+/**
+ * Thin wrapper around fetch calls to the FastAPI backend
+ */
 class ApiService {
     
+    /**
+     * Performs a product search with optional filters
+     * @param {Object} filters 
+     * @returns {Promise<Object>} API response JSON
+     */
     async fun_search_products(filters) {
         const search_params = new URLSearchParams();
         
@@ -323,6 +387,7 @@ class ApiService {
     }
     
     
+    /** Fetches every product (used on initial load) */
     async fun_fetch_all_products() {
         const response = await fetch(`${API_BASE_URL}${PRODUCTS_ENDPOINT}`);
         
@@ -334,6 +399,7 @@ class ApiService {
     }
     
     
+    /** Retrieves list of available categories */
     async fun_fetch_categories() {
         const response = await fetch(`${API_BASE_URL}${CATEGORIES_ENDPOINT}`);
         
@@ -347,9 +413,12 @@ class ApiService {
 
 
 // Application Initialization
+/**
+ * Bootstrap – creates MVC components and starts the app
+ */
 document.addEventListener('DOMContentLoaded', async () => {
-    const search_view = new SearchView();
-    const api_service = new ApiService();
+    const search_view       = new SearchView();
+    const api_service       = new ApiService();
     const search_controller = new SearchController(search_view, api_service);
     
     await search_controller.fun_initialize();

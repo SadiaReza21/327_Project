@@ -17,9 +17,9 @@ This is an online grocery shopping platform that is made to make the home essent
 ### Creating MySQL database :
 - Download the correct version of XAMPP for your computer through this link - https://www.apachefriends.org/download.html
 - After installing XAMPP, open the control panel, start the Apache server and then start the MySQL server.
-- Then click Admin for MySQL. This will take you to the phpmyadmin page. Here you need to create a database named "bazarkori_db"
+- Then click Admin for MySQL. This will take you to the phpmyadmin page. Here you need to create a database named "bazar_kori"
 - Then click on the database and click import.
-- Then choose the bazarkori_db.sql file from the git repo cloned.
+- Then choose the bazar_kori.sql file from the git repo cloned.
 - This will create the needed tables for you.
 
 ### Running the project
